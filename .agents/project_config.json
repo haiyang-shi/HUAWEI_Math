@@ -1,0 +1,31 @@
+{
+  "project": "2026年中国研究生数学建模竞赛B题",
+  "problem_statement": "氢燃料电池低温冷启动建模与控制策略研究.pdf",
+  "input_directory": "problem_files",
+  "workflow_output_directory": "paper_output",
+  "active_question": "Q1",
+  "question_output_directory": "问题1",
+  "numerical_python": "D:/Anaconda/python.exe",
+  "artifact_python": "C:/Users/shy/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+  "skills": {
+    "paper-workflow-orchestrator": "输入预检、阶段路由；当前只执行到问题1所需阶段",
+    "problem-doc-model-selector": "识别四问；Q1自动分类须改为机理仿真，嵌入式公式须人工核对",
+    "modeling-paper-rubric-and-model-selector": "四问路线和证据映射；Q1使用一维多相物理模型",
+    "authoritative-data-harvester": "仅在附件和正式文献均缺参数时启用；记录来源",
+    "data-cleaning-and-visualization": "读取附件2的两组时序；保留原始值并核查电流密度口径",
+    "sympy": "核对控制方程、量纲与雅可比；不替代数值结果",
+    "pymoo": "问题2至4的受约束、多目标优化；Q1不依赖",
+    "model-code-and-result-generator": "提供结果契约；实际Q1代码由问题1目录的机理模型实现",
+    "quality-assurance-auditor": "检查每问真实代码、指标、守恒、网格收敛和数据来源",
+    "context-memory-keeper": "记录题意口径、参数版本、已完成阶段与遗留疑点",
+    "paper-formal-writer": "四问证据齐备后才用于正式论文；本次问题1报告独立成稿",
+    "paper-micro-unit-generator": "仅正式论文局部修复时启用"
+  },
+  "q1_data_policy": {
+    "current_density_column": "附件2/E列作为实验输入",
+    "current_column": "附件2/B列只作一致性检查，不除以附件1的25cm2面积",
+    "calibration": "仅使用-20摄氏度实验曲线校准少数参数",
+    "validation": "-25摄氏度实验曲线作跨工况独立验证",
+    "ice_observation": "附件2无冰测量；冰预测需标注为未直接验证"
+  }
+}

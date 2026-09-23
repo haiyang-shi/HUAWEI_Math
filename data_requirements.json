@@ -1,0 +1,10 @@
+{
+  "tasks": [
+    {
+      "type": "manual_search",
+      "query": "因此， 建立能够反映水热状态、 电化学 出了建立氢燃料电池模型所需的相关参数，附件 2 中提供了冷启动实验数据",
+      "notes": "由 problem-doc-model-selector 检测到题目可能需要外部公开数据，请优先寻找官方或权威来源。",
+      "active": true
+    }
+  ]
+}

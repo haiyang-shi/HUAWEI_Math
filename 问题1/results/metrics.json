@@ -1,0 +1,109 @@
+{
+  "status": "computed_q1_only",
+  "generated_at": "2026-09-23T10:08:27",
+  "source_statement": "problem_files/氢燃料电池低温冷启动建模与控制策略研究.pdf",
+  "calibration_condition": "-20℃",
+  "independent_validation_condition": "-25℃",
+  "calibration_success": true,
+  "calibration_message": "`ftol` termination condition is satisfied.",
+  "calibration_mesh_cells": 84,
+  "report_time_step_s": 0.05,
+  "calibration_function_evaluations": 78,
+  "parameters": {
+    "j0_ref_am2": 0.2584358643212273,
+    "plate_capacity_scale": 1.0003488529950952,
+    "freeze_rate_s": 0.2,
+    "melt_rate_s": 0.2,
+    "liquid_diffusivity_scale": 1.0,
+    "ice_area_exponent": 3.5,
+    "membrane_lambda": 3.0,
+    "uptake_fraction": 0.7702741925727269,
+    "hydration_activity_exponent": 1.5749305496051698,
+    "contact_ohm_m2": 1e-06,
+    "dry_interface_ohm_m2": 0.0001659041956920321
+  },
+  "metrics": {
+    "-20℃": {
+      "voltage_mae_v": 0.0030365095264615785,
+      "voltage_rmse_v": 0.004013153063883865,
+      "voltage_mean_relative_error_percent": 0.47746982167614826,
+      "temperature_mae_c": 0.007926486520238708,
+      "temperature_rmse_c": 0.009618483456331805,
+      "temperature_mean_relative_error_percent_celsius": 0.04739961041471443,
+      "max_ice_fraction_end": 0.008487810644256693,
+      "max_ice_fraction_whole_run": 0.008487810644256693,
+      "max_pore_ice_saturation_whole_run": 0.020175447217154013,
+      "max_pore_occupancy_whole_run": 0.036693695369558355,
+      "minimum_gas_concentration_mol_m3": 9.706160555906973,
+      "minimum_voltage_v": 0.4845111897414176,
+      "max_mass_balance_error_kg_m2": 8.239936510889834e-18,
+      "max_energy_balance_error_j_m2": 2.1579398890025914e-06,
+      "final_heat_generated_j_m2": 56042.59090196584,
+      "final_latent_released_j_m2": 25.160228504129776,
+      "final_heat_lost_j_m2": 8227.590305611555,
+      "final_heat_storage_j_m2": 47840.160827016356,
+      "final_generated_water_kg_m2": 0.005992133492252675,
+      "final_retained_pore_water_kg_m2": 0.00014502181151554514,
+      "final_membrane_sorbed_increment_kg_m2": 0.0030402583839217487,
+      "final_escaped_water_kg_m2": 0.002806853296815389,
+      "final_membrane_lambda": 9.546637346946051
+    },
+    "-25℃": {
+      "voltage_mae_v": 0.011007470002381859,
+      "voltage_rmse_v": 0.012961613550036092,
+      "voltage_mean_relative_error_percent": 1.76805125288364,
+      "temperature_mae_c": 0.10479435596673624,
+      "temperature_rmse_c": 0.14017363837841232,
+      "temperature_mean_relative_error_percent_celsius": 0.5321553542270423,
+      "max_ice_fraction_end": 0.02571349369101899,
+      "max_ice_fraction_whole_run": 0.02571349369101899,
+      "max_pore_ice_saturation_whole_run": 0.061120736132681215,
+      "max_pore_occupancy_whole_run": 0.08468010468613357,
+      "minimum_gas_concentration_mol_m3": 9.87651633202696,
+      "minimum_voltage_v": 0.46598744092886935,
+      "max_mass_balance_error_kg_m2": 6.071532165918825e-18,
+      "max_energy_balance_error_j_m2": 2.1170199033804238e-06,
+      "final_heat_generated_j_m2": 58709.26990471932,
+      "final_latent_released_j_m2": 125.71980977523022,
+      "final_heat_lost_j_m2": 8645.013258769472,
+      "final_heat_storage_j_m2": 50189.97645783514,
+      "final_generated_water_kg_m2": 0.006158459966844449,
+      "final_retained_pore_water_kg_m2": 0.0005744386228298592,
+      "final_membrane_sorbed_increment_kg_m2": 0.0030915608795580845,
+      "final_escaped_water_kg_m2": 0.0024924604644565094,
+      "final_membrane_lambda": 9.657107837119035
+    }
+  },
+  "numerical_checks": {
+    "grid_84_to_112_voltage_max_diff_v": 9.658115229183029e-05,
+    "grid_84_to_112_temperature_max_diff_c": 0.00018077506149438705,
+    "grid_84_to_112_ice_max_diff": 0.0002501920361487244,
+    "time_step_0p05_to_0p025_voltage_max_diff_v": 2.990154504778353e-05,
+    "time_step_0p05_to_0p025_temperature_max_diff_c": 0.002119267948103243,
+    "time_step_0p05_to_0p025_ice_max_diff": 7.302444524141284e-06
+  },
+  "ice_sensitivity": {
+    "freeze_rate_s_x0.2": {
+      "max_ice_fraction": 0.0018435362021703464,
+      "voltage_rmse_v": 0.0038958385700617135
+    },
+    "liquid_diffusivity_scale_x0.2": {
+      "max_ice_fraction": 0.018914634519911648,
+      "voltage_rmse_v": 0.00421948243528232
+    },
+    "freeze_rate_s_x5.0": {
+      "max_ice_fraction": 0.03033110742112685,
+      "voltage_rmse_v": 0.004738663260055446
+    },
+    "liquid_diffusivity_scale_x5.0": {
+      "max_ice_fraction": 0.002229026021710116,
+      "voltage_rmse_v": 0.0038998946213833026
+    }
+  },
+  "limitations": [
+    "No experimental ice fraction is provided; ice predictions are not directly validated.",
+    "MEA one-dimensional field uses quasi-steady gas and mean membrane hydration.",
+    "The supplied current and current-density columns imply a different active area than 25 cm2.",
+    "Experiments end below 0 C; thawing and successful startup cannot be validated here."
+  ]
+}
