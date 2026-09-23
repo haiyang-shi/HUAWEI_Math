@@ -69,14 +69,19 @@
   "question_links": [
     {
       "question_id": "Q1",
+      "observation_source": "problem_files/附件2.xlsx",
+      "observation_sheets": ["-20℃", "-25℃"],
+      "observation_column_positions": {"time_s": 1, "current_A": 2, "voltage_V": 3, "temperature_C": 4, "current_density_Acm2": 5},
       "required_fields": [
-        "参数类别",
-        "参数名称",
-        "默认值或表达式"
+        "time_s",
+        "current_density_Acm2",
+        "voltage_exp_V",
+        "temperature_exp_C"
       ],
       "expected_outputs": [
-        "结果表",
-        "误差指标表"
+        "问题1/results/table_minus20.csv",
+        "问题1/results/table_minus25.csv",
+        "问题1/results/metrics.json"
       ]
     },
     {

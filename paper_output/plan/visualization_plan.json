@@ -11,48 +11,54 @@
       "figure_id": "fig_q1_1",
       "question_id": "Q1",
       "title": "电压和温度实验/模型对照及残差",
-      "chart_type": "residual_distribution",
-      "template_hint": "plot_residual_distribution",
-      "data_source": "paper_output/data_cleaned/附件1_cleaned.csv",
-      "candidate_x": "参数类别",
+      "chart_type": "model_validation",
+      "template_hint": "问题1/run.py:plot_results",
+      "data_source": "问题1/results/trajectory_minus20.csv",
+      "comparison_source": "问题1/results/trajectory_minus25.csv",
+      "candidate_x": "time_s",
       "candidate_y": [
-        "参数名称",
-        "默认值或表达式"
+        "voltage_exp_V",
+        "voltage_model_V",
+        "temperature_exp_C",
+        "temperature_model_C"
       ],
       "purpose": "支撑Q1的模型结果、验证或敏感性分析",
-      "output_path": "paper_output/figures/fig_q1_1.png",
+      "output_path": "问题1/results/validation_curves.png",
       "paper_usage": "问题一结果分析"
     },
     {
       "figure_id": "fig_q1_2",
       "question_id": "Q1",
-      "title": "最大冰体积分数时间曲线和厚度剖面",
+      "title": "膜水合与最大孔隙冰饱和度时间曲线",
       "chart_type": "line",
-      "template_hint": "plot_generic_line",
-      "data_source": "paper_output/data_cleaned/附件1_cleaned.csv",
-      "candidate_x": "参数类别",
+      "template_hint": "问题1/run.py:plot_results",
+      "data_source": "问题1/results/trajectory_minus20.csv",
+      "comparison_source": "问题1/results/trajectory_minus25.csv",
+      "field_sources": ["问题1/results/field_minus20_35s.csv", "问题1/results/field_minus25_35s.csv"],
+      "candidate_x": "time_s",
       "candidate_y": [
-        "参数名称",
-        "默认值或表达式"
+        "max_ice_volume_fraction",
+        "max_pore_ice_saturation"
       ],
       "purpose": "支撑Q1的模型结果、验证或敏感性分析",
-      "output_path": "paper_output/figures/fig_q1_2.png",
+      "output_path": "问题1/results/water_ice_dynamics.png",
       "paper_usage": "问题一结果分析"
     },
     {
       "figure_id": "fig_q1_3",
       "question_id": "Q1",
-      "title": "冰相变参数敏感性与网格收敛对照",
-      "chart_type": "sensitivity_curve",
-      "template_hint": "plot_sensitivity_curve",
-      "data_source": "paper_output/data_cleaned/附件1_cleaned.csv",
-      "candidate_x": "参数类别",
+      "title": "结冰及电化学反馈消融对照",
+      "chart_type": "ablation_curve",
+      "template_hint": "问题1/run.py:plot_results",
+      "data_source": "问题1/results/metrics.json",
+      "uncertainty_source": "问题1/results/uncertainty_envelopes.json",
+      "candidate_x": "time_s",
       "candidate_y": [
-        "参数名称",
-        "默认值或表达式"
+        "voltage_v",
+        "max_ice_fraction"
       ],
       "purpose": "支撑Q1的模型结果、验证或敏感性分析",
-      "output_path": "paper_output/figures/fig_q1_3.png",
+      "output_path": "问题1/results/ablation_curves.png",
       "paper_usage": "问题一结果分析"
     },
     {

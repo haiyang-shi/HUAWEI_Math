@@ -34,19 +34,19 @@
           "figure_id": "fig_q1_1",
           "title": "电压和温度实验/模型对照及残差",
           "purpose": "支撑Q1的模型结果、验证或敏感性分析",
-          "expected_path": "paper_output/figures/fig_q1_1.png"
+          "expected_path": "问题1/results/validation_curves.png"
         },
         {
           "figure_id": "fig_q1_2",
-          "title": "最大冰体积分数时间曲线和厚度剖面",
+          "title": "膜水合与最大孔隙冰饱和度时间曲线",
           "purpose": "支撑Q1的模型结果、验证或敏感性分析",
-          "expected_path": "paper_output/figures/fig_q1_2.png"
+          "expected_path": "问题1/results/water_ice_dynamics.png"
         },
         {
           "figure_id": "fig_q1_3",
-          "title": "冰相变参数敏感性与网格收敛对照",
+          "title": "结冰及电化学反馈消融对照",
           "purpose": "支撑Q1的模型结果、验证或敏感性分析",
-          "expected_path": "paper_output/figures/fig_q1_3.png"
+          "expected_path": "问题1/results/ablation_curves.png"
         }
       ],
       "paper_sections": [
