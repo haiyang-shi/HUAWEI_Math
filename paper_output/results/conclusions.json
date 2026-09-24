@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "generated_by": "model-code-and-result-generator/scripts/build_result_contracts.py",
+  "generated_at": "2026-09-24T22:57:25",
+  "source": "paper_output/results/model_results.json",
+  "items": [
+    {
+      "question_id": "Q1",
+      "conclusion_text": "Q1 需要补入真实数据和专用建模代码后才能形成结论。",
+      "evidence_status": "needs_real_modeling"
+    },
+    {
+      "question_id": "Q2",
+      "conclusion_text": "Q2 需要补入真实数据和专用建模代码后才能形成结论。",
+      "evidence_status": "needs_real_modeling"
+    },
+    {
+      "question_id": "Q3",
+      "conclusion_text": "纯预热应在五片越过0摄氏度后接入问题二的最优线性加载，而不是瞬时施加0.3 A/cm2；离散复算值为46.5 s和5812.5 J。",
+      "evidence_status": "computed"
+    },
+    {
+      "question_id": "Q3",
+      "conclusion_text": "恒功率协同候选采用(0.50,0.32,0.25,0.32,0.50) W/cm2加热4.10 s，辅助能耗193.725 J，总启动约272.8 s；4.05 s细步长复核因电压低于0.30 V失败。",
+      "evidence_status": "computed"
+    },
+    {
+      "question_id": "Q3",
+      "conclusion_text": "协同方案辅助电热丝能耗降低约96.67%，但启动慢约226.3 s，且首尾片最大局部冰体积分数约0.417，端部仍是主要瓶颈。",
+      "evidence_status": "computed"
+    },
+    {
+      "question_id": "Q4",
+      "conclusion_text": "Q4 需要补入真实数据和专用建模代码后才能形成结论。",
+      "evidence_status": "needs_real_modeling"
+    }
+  ]
+}

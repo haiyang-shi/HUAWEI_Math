@@ -16,7 +16,7 @@ import numpy as np
 from scipy.linalg import expm
 from scipy.optimize import minimize
 
-from aux_model import AuxStack
+from aux_model import AuxStack, Q2_LINEAR_PARAMETERS
 from stack_model import AREA_CM2, ENDPLATE_CAP_J_K, ENDPLATE_CONV_W_K, T_FREEZE
 
 HERE = Path(__file__).resolve().parent
@@ -47,7 +47,7 @@ class NoLoadThermal:
         self.zeros = np.zeros(self.stack.cell.n)
         self.lam = self.stack.params.membrane_lambda
 
-    def evaluate(self, x):
+    def evaluate(self, x, loaded_current=Q2_LINEAR_PARAMETERS[0]):
         q = symmetric_power(x)
         heat_s = float(x[3])
         p = np.r_[0.0, AREA_CM2 * q, 0.0]
@@ -56,15 +56,16 @@ class NoLoadThermal:
         vv = []
         for k in range(5):
             state = np.full(self.stack.cell.n, temp_c[k + 1] + T_FREEZE)
-            vv.append(self.stack._voltage(state, self.zeros, self.zeros,
-                                          self.lam, 3000.0, self.stack.factors[k])[0])
+            vv.append(self.stack._voltage(
+                state, self.zeros, self.zeros, self.lam,
+                1e4 * loaded_current, self.stack.factors[k])[0])
         return temp_c[1:6], np.array(vv)
 
 
 def search_preheat():
     thermal = NoLoadThermal()
-    starts = [[1, 1, 1, 200], [1, .7, .7, 220],
-              [.9, .9, .9, 250], [1, .5, .3, 300]]
+    starts = [[1, 1, 1, 50], [1, .8, .8, 65],
+              [.8, .8, .8, 80], [1, .6, .4, 100]]
     evaluated = []
     best = None
 
@@ -76,44 +77,48 @@ def search_preheat():
         return np.r_[t - 0.01, v - 0.3005]
 
     for x0 in starts:
-        opt = minimize(cost, x0, method="SLSQP", bounds=[(0, 1)] * 3 + [(30, 500)],
+        opt = minimize(cost, x0, method="SLSQP", bounds=[(0, 1)] * 3 + [(20, 300)],
                        constraints=[{"type": "ineq", "fun": constraints}],
                        options={"maxiter": 180, "ftol": 1e-7})
         x = opt.x
         t, v = thermal.evaluate(x)
         item = {"start": x0, "parameters": [float(z) for z in x],
                 "energy_j": cost(x), "min_temperature_c": float(min(t)),
+                "postload_policy": "Q2 optimized linear 0.17 to 0.50 A/cm2 in 5 s",
+                "loaded_current_at_switch_a_cm2": Q2_LINEAR_PARAMETERS[0],
                 "min_loaded_voltage_v": float(min(v)),
                 "feasible_surrogate": bool(np.min(constraints(x)) >= -1e-5),
                 "solver_success": bool(opt.success), "message": str(opt.message),
                 "evaluations": int(opt.nfev)}
         evaluated.append(item)
-        if item["feasible_surrogate"] and (best is None or item["energy_j"] < best["energy_j"]):
+        if (item["feasible_surrogate"] and item["solver_success"]
+                and (best is None or item["energy_j"] < best["energy_j"])):
             best = item
-    ready_runs = []
-    ready_best = None
-    for x0 in ([1, 1, 1, 50], [1, .8, .8, 65], [.8, .8, .8, 80]):
-        opt = minimize(cost, x0, method="SLSQP", bounds=[(0, 1)] * 3 + [(20, 300)],
-                       constraints=[{"type": "ineq", "fun": lambda x: thermal.evaluate(x)[0] - .01}],
-                       options={"maxiter": 180, "ftol": 1e-7})
-        t, v = thermal.evaluate(opt.x)
-        item = {"start": x0, "parameters": [float(z) for z in opt.x],
-                "energy_j": cost(opt.x), "min_temperature_c": float(min(t)),
-                "min_immediate_step_voltage_v": float(min(v)),
-                "feasible_surrogate": bool(min(t) >= .01 - 1e-5),
-                "solver_success": bool(opt.success), "evaluations": int(opt.nfev)}
-        ready_runs.append(item)
-        if item["feasible_surrogate"] and (ready_best is None or item["energy_j"] < ready_best["energy_j"]):
-            ready_best = item
     OUT.mkdir(exist_ok=True)
-    payload = {"immediate_0p3_Acm2": {"runs": evaluated, "best": best},
-               "temperature_ready_only": {"runs": ready_runs, "best": ready_best}}
+    payload = {
+        "interpretation": (
+            "Pure preheating uses zero current until all five cells exceed 0 C, "
+            "then starts Q2's optimized linear loading policy."
+        ),
+        "postload_policy": {
+            "family": "linear",
+            "parameters": list(Q2_LINEAR_PARAMETERS),
+            "source": "Problem 2 fastest feasible candidate"
+        },
+        "runs": evaluated,
+        "best": best,
+    }
     (OUT / "preheat_search.json").write_text(json.dumps(payload, indent=2), encoding="utf-8")
     print(json.dumps(payload, indent=2), flush=True)
 
 
 CO_CANDIDATES = [
     ([0]*5, 0),
+    ([.5, .32, .25, .32, .5], 3.5),
+    ([.5, .32, .25, .32, .5], 4.0),
+    ([.5, .32, .25, .32, .5], 4.05),
+    ([.5, .32, .25, .32, .5], 4.10),
+    ([.5, .32, .25, .32, .5], 4.20),
     ([.4]*5, 15), ([.5]*5, 20), ([.8]*5, 60), ([1]*5, 40),
     ([.5, .32, .25, .32, .5], 15),
     ([.45, .35, .3, .35, .45], 15),
@@ -126,7 +131,7 @@ CO_CANDIDATES = [
 ]
 
 
-def search_cooperative(dt=0.5, time_cap=300):
+def search_cooperative(dt=0.1, time_cap=310):
     stack = AuxStack(symmetric=True, mesh_factor=1)
     rows = []
     for q, heat_s in CO_CANDIDATES:

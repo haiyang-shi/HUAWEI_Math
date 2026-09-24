@@ -1,0 +1,54 @@
+{
+  "status": "completed",
+  "cases": {
+    "conservative_84_dt0.05": {
+      "success": true,
+      "reason": "startup",
+      "startup_s": 268.2000000000267,
+      "energy_j": 708.749999999998,
+      "min_voltage_v": 0.5717365821445448,
+      "max_ice_fraction": 0.36054236303743076,
+      "max_pore_occupancy": 0.8620354040704584,
+      "energy_balance_j": -9.592222340870649e-07
+    },
+    "conservative_freeze_x5_84_dt0.2": {
+      "success": false,
+      "reason": "voltage_below_0.30V",
+      "startup_s": null,
+      "energy_j": 708.7500000000005,
+      "min_voltage_v": -0.5447030979632765,
+      "max_ice_fraction": 0.4133576055253314,
+      "max_pore_occupancy": 1.0007782978125106,
+      "energy_balance_j": 1.0180019671679474e-07
+    },
+    "conservative_resistance_x0.5_84_dt0.2": {
+      "success": true,
+      "reason": "startup",
+      "startup_s": 271.39999999999316,
+      "energy_j": 708.7500000000005,
+      "min_voltage_v": 0.5431334923740754,
+      "max_ice_fraction": 0.39544602507753207,
+      "max_pore_occupancy": 0.9455430581579184,
+      "energy_balance_j": 7.917369657661766e-07
+    },
+    "preheat_84_dt0.05": {
+      "success": true,
+      "reason": "startup",
+      "startup_s": 195.0000000000101,
+      "energy_j": 24375.0,
+      "min_voltage_v": 0.3006036365996134,
+      "max_ice_fraction": 0.0,
+      "max_pore_occupancy": 0.0,
+      "energy_balance_j": -9.779651009012014e-07
+    },
+    "q2_zero_heater_regression": {
+      "q2_startup_s": 34.900000000000155,
+      "q3_zero_heater_startup_s": 34.900000000000155,
+      "q2_min_voltage_v": 0.30438479913879213,
+      "q3_zero_heater_min_voltage_v": 0.3043847992316096,
+      "startup_difference_s": 0.0
+    }
+  },
+  "source_code_sha256": "a708507abcb76efefb165226f2a80002ee01f13b47adc57104c2e46ddd4f1245",
+  "run_command": "D:\\Anaconda\\python.exe \u95ee\u98983/robust_checks.py"
+}

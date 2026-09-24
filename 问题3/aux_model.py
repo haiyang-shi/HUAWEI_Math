@@ -16,7 +16,11 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "问题2"))
 from stack_model import (AREA_M2, AREA_CM2, ENDPLATE_CAP_J_K,
                          ENDPLATE_CONV_W_K, ETH, LATENT_FREEZE,
-                         MW, F, T_FREEZE, VSAFE_V, StackModel)
+                         MW, F, T_FREEZE, VSAFE_V, StackModel,
+                         policy_current)
+
+
+Q2_LINEAR_PARAMETERS = (0.17, 0.50, 5.0)
 
 
 @dataclass
@@ -56,17 +60,34 @@ class AuxResult:
         return np.array(self.powers_w_cm2) * AREA_CM2 * self.actual_heat_s
 
 
-def prescribed_current(t, mode, heat_s, postload="step"):
-    """A/cm2.  For preheat, the post-load current is an explicit convention."""
+def prescribed_current(t, mode, heat_s, postload="q2_linear"):
+    """Return the Q3 current density in A/cm2.
+
+    The statement explicitly excludes pure preheating from the common Q3
+    0-to-0.3 A/cm2 ramp.  Once all cells are above 0 C, pure preheating is
+    therefore closed with Q2's fastest feasible optimized loading policy.
+    """
     if mode == "cooperative":
         return min(0.005 * max(t, 0.0), 0.3)
     if t < heat_s - 1e-10:
         return 0.0
+    if postload == "q2_linear":
+        return policy_current("linear", Q2_LINEAR_PARAMETERS, max(t - heat_s, 0.0))
     if postload == "step":
         return 0.3
     if postload == "ramp":
         return min(0.005 * max(t - heat_s, 0.0), 0.3)
     raise ValueError(postload)
+
+
+def current_breakpoints(mode, heat_s, postload):
+    if mode == "cooperative":
+        return (heat_s, 60.0)
+    if postload == "q2_linear":
+        return (heat_s, heat_s + Q2_LINEAR_PARAMETERS[2])
+    if postload == "ramp":
+        return (heat_s, heat_s + 60.0)
+    return (heat_s,)
 
 
 class AuxStack(StackModel):
@@ -79,6 +100,7 @@ class AuxStack(StackModel):
                                 if symmetric else
                                 (self.end_concentration_factor, 1.0, 1.0,
                                  1.0, self.end_concentration_factor))
+        self._heat_solver_cache = {}
 
     def _heat_network(self, profiles, old_plate, ambient_k, dt):
         m = self.cell
@@ -87,18 +109,24 @@ class AuxStack(StackModel):
         before = np.r_[old_plate[0], cell_means, old_plate[1]]
         caps = np.array([ENDPLATE_CAP_J_K] + [self.cell_capacity_j_k] * 5
                         + [ENDPLATE_CAP_J_K])
-        mat = np.diag(caps.copy())
         rhs = caps * before
-        for edge in range(6):
-            g = self.plate_g_w_k if edge in (0, 5) else self.link_g_w_k
-            mat[edge, edge] += dt * g
-            mat[edge + 1, edge + 1] += dt * g
-            mat[edge, edge + 1] -= dt * g
-            mat[edge + 1, edge] -= dt * g
+        key = round(float(dt), 12)
+        solver = self._heat_solver_cache.get(key)
+        if solver is None:
+            mat = np.diag(caps.copy())
+            for edge in range(6):
+                g = self.plate_g_w_k if edge in (0, 5) else self.link_g_w_k
+                mat[edge, edge] += dt * g
+                mat[edge + 1, edge + 1] += dt * g
+                mat[edge, edge + 1] -= dt * g
+                mat[edge + 1, edge] -= dt * g
+            for edge in (0, 6):
+                mat[edge, edge] += dt * ENDPLATE_CONV_W_K
+            solver = np.linalg.inv(mat)
+            self._heat_solver_cache[key] = solver
         for edge in (0, 6):
-            mat[edge, edge] += dt * ENDPLATE_CONV_W_K
             rhs[edge] += dt * ENDPLATE_CONV_W_K * ambient_k
-        after = np.linalg.solve(mat, rhs)
+        after = solver @ rhs
         for z, pos in enumerate(self.positions):
             profiles[z] += after[pos + 1] - means[z]
         lost = dt * ENDPLATE_CONV_W_K * (after[0] + after[6] - 2 * ambient_k)
@@ -106,7 +134,7 @@ class AuxStack(StackModel):
 
     def simulate(self, mode, powers, heat_s, *, initial_c=-30.0,
                  ambient_c=-30.0, dt_max=0.5, time_cap=240.0,
-                 capture_interval=1.0, postload="step", charge_limit=None,
+                 capture_interval=1.0, postload="q2_linear", charge_limit=None,
                  temp_margin=0.0, stop_on_success=True):
         if mode not in ("preheat", "cooperative"):
             raise ValueError(mode)
@@ -175,7 +203,7 @@ class AuxStack(StackModel):
 
         while t < time_cap - 1e-11 and (not success or not stop_on_success):
             step = min(dt_max, time_cap - t)
-            for point in (heat_s, 60.0 if mode == "cooperative" else heat_s + 60.0):
+            for point in current_breakpoints(mode, heat_s, postload):
                 if t + 1e-10 < point < t + step - 1e-10:
                     step = point - t
             jstart = prescribed_current(t, mode, heat_s, postload)

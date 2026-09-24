@@ -18,8 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "results"
 
-PREHEAT = ([1.0] * 5, 195.0)
-COOPERATIVE = ([.5, .32, .25, .32, .5], 4.0)
+PREHEAT = ([1.0] * 5, 46.5)
+COOPERATIVE = ([.5, .32, .25, .32, .5], 4.1)
 
 
 def as_record(r):
@@ -66,9 +66,9 @@ def save_trajectory(path, r):
                         *r.voltage_v[i], *r.ice_fraction[i]])
 
 
-def plot_results(pre, co):
+def plot_results(pre_follow, co):
     fig, axes = plt.subplots(2, 3, figsize=(13, 7), constrained_layout=True)
-    for row, r in enumerate((pre, co)):
+    for row, r in enumerate((pre_follow, co)):
         t = r.time_s
         for k in range(5):
             axes[row, 0].plot(t, r.temperature_c[:, k], lw=1.2, label=f"cell {k+1}")
@@ -92,7 +92,7 @@ def plot_results(pre, co):
 
     fig, ax = plt.subplots(figsize=(7, 4), constrained_layout=True)
     x = np.arange(1, 6)
-    ax.bar(x - .18, pre.energy_each_j, width=.36, label="pure preheat")
+    ax.bar(x - .18, pre_follow.energy_each_j, width=.36, label="pure preheat")
     ax.bar(x + .18, co.energy_each_j, width=.36, label="cooperative")
     ax.set(xlabel="Cell index", ylabel="Auxiliary heater energy (J)", xticks=x)
     ax.legend()
@@ -110,12 +110,15 @@ def file_info(path):
 def main():
     OUT.mkdir(exist_ok=True)
     model = AuxStack(symmetric=False, mesh_factor=3)
-    pre = model.simulate("preheat", *PREHEAT, dt_max=.1, time_cap=196,
-                         postload="step", capture_interval=.5)
+    pre = model.simulate("preheat", *PREHEAT, dt_max=.05, time_cap=46.6,
+                         postload="q2_linear", capture_interval=.1)
     print("preheat", pre.success, pre.reason, pre.startup_s, pre.heat_aux_j,
           pre.min_voltage_v, flush=True)
-    save_trajectory(OUT / "preheat_trajectory.csv", pre)
-    co = model.simulate("cooperative", *COOPERATIVE, dt_max=.1, time_cap=300,
+    pre_follow = model.simulate(
+        "preheat", *PREHEAT, dt_max=.05, time_cap=51.5,
+        postload="q2_linear", capture_interval=.1, stop_on_success=False)
+    save_trajectory(OUT / "preheat_trajectory.csv", pre_follow)
+    co = model.simulate("cooperative", *COOPERATIVE, dt_max=.05, time_cap=310,
                         capture_interval=.5)
     print("cooperative", co.success, co.reason, co.startup_s, co.heat_aux_j,
           co.min_voltage_v, flush=True)
@@ -124,11 +127,15 @@ def main():
         raise RuntimeError("A selected primary strategy failed the final simulation")
     table = {"model_status": "model_prediction",
              "mesh_cells_per_cell": model.cell.n,
-             "dt_max_s": .1,
+             "dt_max_s": .05,
              "initial_and_ambient_c": -30,
-             "preheat_postload": "immediate 0.3 A/cm2 step, explicitly assumed",
+             "preheat_postload": (
+                 "Q2 optimized linear policy: 0.17 to 0.50 A/cm2 in 5 s; "
+                 "voltage checked at the loaded right limit"
+             ),
              "charge_limit_primary": None,
              "preheat": as_record(pre),
+             "preheat_postload_5s_check": as_record(pre_follow),
              "cooperative": as_record(co)}
     (OUT / "table4.json").write_text(json.dumps(table, ensure_ascii=False, indent=2), encoding="utf-8")
     with (OUT / "table4.csv").open("w", newline="", encoding="utf-8-sig") as f:
@@ -140,41 +147,33 @@ def main():
             w.writerow([name, *r.powers_w_cm2, r.actual_heat_s,
                         *r.energy_each_j, r.heat_aux_j, r.startup_s,
                         r.max_ice_fraction, r.min_voltage_v, r.success])
-    plot_results(pre, co)
+    plot_results(pre_follow, co)
 
-    # Interpretive checks from the written plan: the temperature-ready lower
-    # bound, the first 60 seconds after a gentle preheat ramp, and the Q2 charge
-    # budget as an explicitly additional constraint.
-    ready = model.simulate("preheat", [1]*5, 46.5, postload="ramp",
-                           dt_max=.2, time_cap=47, capture_interval=.5)
-    ready_follow = model.simulate("preheat", [1]*5, 46.5, postload="ramp",
-                                  dt_max=.2, time_cap=106.5,
-                                  capture_interval=.5, stop_on_success=False)
-    budget_co = model.simulate("cooperative", *COOPERATIVE, dt_max=.2,
-                               time_cap=120, charge_limit=20, capture_interval=1)
-    budget_feasible = model.simulate("cooperative", [1]*5, 60, dt_max=.2,
-                                     time_cap=120, charge_limit=20, capture_interval=1)
+    # The five-second continuation is an engineering check, not an additional
+    # condition inserted into the statement's first-passage startup time.
     alternate = {
-        "temperature_ready_preheat": as_record(ready),
-        "temperature_ready_60s_followup": {
-            "reason": ready_follow.reason,
-            "minimum_voltage_v": ready_follow.min_voltage_v,
+        "preheat_Q2_linear_5s_followup": {
+            "postload_policy": "0.17 to 0.50 A/cm2 in 5 s",
+            "minimum_voltage_v": pre_follow.min_voltage_v,
             "minimum_temperature_after_load_c": float(np.min(
-                ready_follow.temperature_c[ready_follow.time_s >= 46.5])),
-            "terminal_min_temperature_c": float(min(ready_follow.final_temperature_c)),
+                pre_follow.temperature_c[pre_follow.time_s >= PREHEAT[1]])),
+            "terminal_min_temperature_c": float(min(pre_follow.final_temperature_c)),
+            "terminal_current_a_cm2": float(pre_follow.current_a_cm2[-1]),
+            "charge_c_cm2": float(pre_follow.charge_c_cm2[-1]),
+            "note": "stability check only; not added to the PDF first-passage definition",
         },
-        "additional_20_Ccm2_budget_on_selected_cooperative": as_record(budget_co),
-        "additional_20_Ccm2_feasible_comparison": as_record(budget_feasible),
     }
     (OUT / "interpretation_checks.json").write_text(
         json.dumps(alternate, ensure_ascii=False, indent=2), encoding="utf-8")
     paths = [HERE / "aux_model.py", HERE / "search.py", HERE / "finalize.py",
+             HERE / "verify.py",
              ROOT / "问题1/model.py", ROOT / "问题2/stack_model.py",
-             ROOT / "result/metrics.json", HERE / "问题3的解决方案.md",
+             ROOT / "result/metrics.json",
              *[OUT / name for name in ("preheat_search.json", "table4.json", "table4.csv",
                 "preheat_trajectory.csv", "cooperative_trajectory.csv",
                 "strategy_trajectories.png", "energy_distribution.png",
-                "interpretation_checks.json")]]
+                "interpretation_checks.json",
+                "verification.json")]]
     manifest = {"status": "completed_model_prediction",
                 "command": f"{sys.executable} 问题3/finalize.py",
                 "files": [file_info(p) for p in paths if p.exists()]}

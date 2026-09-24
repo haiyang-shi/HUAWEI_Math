@@ -1,6 +1,6 @@
-"""Check numerical resolution and uncertain Q1/Q2 closures for Q3 candidates."""
+"""Check the selected Q3 policies and the cooperative feasibility boundary."""
 
-from dataclasses import replace
+from concurrent.futures import ProcessPoolExecutor, as_completed
 import hashlib
 import json
 from pathlib import Path
@@ -11,8 +11,7 @@ from stack_model import calibrated_parameters
 
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "results"
-Q_LOW = [.5, .32, .25, .32, .5]
-Q_ROBUST = [.5, .32, .25, .32, .5]
+Q_SELECTED = [.5, .32, .25, .32, .5]
 
 
 def record(name, r, mesh_factor, dt_max):
@@ -27,33 +26,34 @@ def record(name, r, mesh_factor, dt_max):
             "energy_balance_j": r.energy_balance_j}
 
 
+def run_case(spec):
+    name, factor, dt, q, heat_s, params, link = spec
+    r = AuxStack(symmetric=True, mesh_factor=factor, params=params,
+                 link_resistance_scale=link).simulate(
+                     "cooperative", q, heat_s, dt_max=dt,
+                     time_cap=310, capture_interval=1000)
+    return record(name, r, factor, dt)
+
+
 def main():
     params = calibrated_parameters()
     cases = [
-        ("low_energy_84_dt0.05", 3, .05, Q_LOW, 4, params, 1.0),
-        ("low_energy_112_dt0.1", 4, .1, Q_LOW, 4, params, 1.0),
-        ("low_energy_56_dt0.1", 2, .1, Q_LOW, 4, params, 1.0),
-        ("conservative_28_dt0.1", 1, .1, Q_ROBUST, 15, params, 1.0),
-        ("low_energy_freeze_x0.2", 3, .2, Q_LOW, 4,
-         replace(params, freeze_rate_s=.04), 1.0),
-        ("low_energy_freeze_x5", 3, .2, Q_LOW, 4,
-         replace(params, freeze_rate_s=1.0), 1.0),
-        ("low_energy_resistance_x0.5", 3, .2, Q_LOW, 4, params, .5),
-        ("low_energy_resistance_x2", 3, .2, Q_LOW, 4, params, 2.0),
+        ("selected_84_dt0.025", 3, .025, Q_SELECTED, 4.10, params, 1.0),
+        ("selected_112_dt0.05", 4, .05, Q_SELECTED, 4.10, params, 1.0),
+        ("lower_boundary_84_dt0.025", 3, .025, Q_SELECTED, 4.05, params, 1.0),
     ]
     rows = []
     OUT.mkdir(exist_ok=True)
-    for name, factor, dt, q, heat_s, p, link in cases:
-        r = AuxStack(symmetric=True, mesh_factor=factor, params=p,
-                     link_resistance_scale=link).simulate(
-                         "cooperative", q, heat_s, dt_max=dt,
-                         time_cap=310, capture_interval=1000)
-        item = record(name, r, factor, dt)
-        rows.append(item)
-        (OUT / "verification.json").write_text(
-            json.dumps({"status": "running", "rows": rows}, indent=2),
-            encoding="utf-8")
-        print(json.dumps(item), flush=True)
+    with ProcessPoolExecutor(max_workers=3) as pool:
+        futures = {pool.submit(run_case, spec): spec[0] for spec in cases}
+        for future in as_completed(futures):
+            item = future.result()
+            rows.append(item)
+            rows.sort(key=lambda row: [case[0] for case in cases].index(row["case"]))
+            (OUT / "verification.json").write_text(
+                json.dumps({"status": "running", "rows": rows}, indent=2),
+                encoding="utf-8")
+            print(json.dumps(item), flush=True)
     payload = {"status": "completed", "rows": rows,
                "source_code_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                "run_command": f"{sys.executable} 问题3/verify.py"}

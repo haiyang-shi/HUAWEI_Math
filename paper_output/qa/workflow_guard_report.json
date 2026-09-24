@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
   "generated_by": "paper-workflow-orchestrator/scripts/workflow_guard.py",
-  "generated_at": "2026-09-24T17:27:55",
+  "generated_at": "2026-09-24T23:24:01",
   "mode": "status",
-  "target_step": "S4",
+  "target_step": "S5",
   "status": "INCOMPLETE",
-  "current_step": "S3",
-  "next_step": "S4",
+  "current_step": "S4",
+  "next_step": "S5",
   "recommended_skill": "model-code-and-result-generator",
-  "next_action": "生成 paper_output/code/modeling/ 下的 q*_model.py 与 run_modeling.py。",
+  "next_action": "实际运行 run_modeling.py，生成 model_results、metrics、conclusions、table_index 与 run_manifest。",
   "steps": [
     {
       "step": "S0",
@@ -37,13 +37,43 @@
     {
       "step": "S4",
       "name": "建模代码",
+      "status": "PASS",
+      "failures": []
+    },
+    {
+      "step": "S5",
+      "name": "结果证据",
       "status": "FAIL",
       "failures": [
-        "缺少建模代码目录：paper_output/code/modeling"
+        "Q1: model_results 状态仍不是正式结果：needs_real_modeling",
+        "Q2: model_results 状态仍不是正式结果：needs_real_modeling",
+        "Q4: model_results 状态仍不是正式结果：needs_real_modeling",
+        "metrics: 条目仍是草稿/待补状态：needs_real_modeling",
+        "metrics: 条目仍是草稿/待补状态：needs_real_modeling",
+        "metrics: 条目仍是草稿/待补状态：needs_real_modeling",
+        "conclusions: 条目仍是草稿/待补状态：needs_real_modeling",
+        "conclusions: 条目仍是草稿/待补状态：needs_real_modeling",
+        "conclusions: 条目仍是草稿/待补状态：needs_real_modeling",
+        "table_index: 条目仍是草稿/待补状态：draft_contract",
+        "table_index: 条目仍是草稿/待补状态：draft_contract",
+        "table_index: 条目仍是草稿/待补状态：draft_contract",
+        "table_index: 条目仍是草稿/待补状态：draft_contract"
       ]
     }
   ],
   "failures": [
-    "S4: 缺少建模代码目录：paper_output/code/modeling"
+    "S5: Q1: model_results 状态仍不是正式结果：needs_real_modeling",
+    "S5: Q2: model_results 状态仍不是正式结果：needs_real_modeling",
+    "S5: Q4: model_results 状态仍不是正式结果：needs_real_modeling",
+    "S5: metrics: 条目仍是草稿/待补状态：needs_real_modeling",
+    "S5: metrics: 条目仍是草稿/待补状态：needs_real_modeling",
+    "S5: metrics: 条目仍是草稿/待补状态：needs_real_modeling",
+    "S5: conclusions: 条目仍是草稿/待补状态：needs_real_modeling",
+    "S5: conclusions: 条目仍是草稿/待补状态：needs_real_modeling",
+    "S5: conclusions: 条目仍是草稿/待补状态：needs_real_modeling",
+    "S5: table_index: 条目仍是草稿/待补状态：draft_contract",
+    "S5: table_index: 条目仍是草稿/待补状态：draft_contract",
+    "S5: table_index: 条目仍是草稿/待补状态：draft_contract",
+    "S5: table_index: 条目仍是草稿/待补状态：draft_contract"
   ]
 }

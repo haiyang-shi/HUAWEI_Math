@@ -1,24 +1,37 @@
 {
   "schema_version": "1.0",
   "generated_by": "context-memory-keeper/scripts/update_workflow_memory.py",
-  "generated_at": "2026-09-23T10:37:03",
+  "generated_at": "2026-09-24T23:24:08",
   "status": "PASS",
-  "root": "D:\\Learning\\study\\数学建模\\第二十三届中国研究生数学建模竞赛 - 中文题目\\中文题目\\B题",
+  "root": "D:\\Learning\\study\\postgraduate\\HUAWEI_Math",
   "workflow": {
     "status": "INCOMPLETE",
     "mode": "status",
-    "current_step": "S3",
-    "next_step": "S4",
+    "current_step": "S4",
+    "next_step": "S5",
     "recommended_skill": "model-code-and-result-generator",
-    "next_action": "生成 paper_output/code/modeling/ 下的 q*_model.py 与 run_modeling.py。",
+    "next_action": "实际运行 run_modeling.py，生成 model_results、metrics、conclusions、table_index 与 run_manifest。",
     "completed_steps": [
       "S0",
       "S1",
       "S2",
-      "S3"
+      "S3",
+      "S4"
     ],
     "failures": [
-      "S4: 缺少建模代码目录：paper_output/code/modeling"
+      "S5: Q1: model_results 状态仍不是正式结果：needs_real_modeling",
+      "S5: Q2: model_results 状态仍不是正式结果：needs_real_modeling",
+      "S5: Q4: model_results 状态仍不是正式结果：needs_real_modeling",
+      "S5: metrics: 条目仍是草稿/待补状态：needs_real_modeling",
+      "S5: metrics: 条目仍是草稿/待补状态：needs_real_modeling",
+      "S5: metrics: 条目仍是草稿/待补状态：needs_real_modeling",
+      "S5: conclusions: 条目仍是草稿/待补状态：needs_real_modeling",
+      "S5: conclusions: 条目仍是草稿/待补状态：needs_real_modeling",
+      "S5: conclusions: 条目仍是草稿/待补状态：needs_real_modeling",
+      "S5: table_index: 条目仍是草稿/待补状态：draft_contract",
+      "S5: table_index: 条目仍是草稿/待补状态：draft_contract",
+      "S5: table_index: 条目仍是草稿/待补状态：draft_contract",
+      "S5: table_index: 条目仍是草稿/待补状态：draft_contract"
     ]
   },
   "inputs": {
@@ -46,12 +59,27 @@
     ],
     "result_templates": []
   },
-  "runs": {},
+  "runs": {
+    "status": "PASS",
+    "run_count": 4,
+    "scripts": [
+      "paper_output/code/modeling/q1_model.py",
+      "paper_output/code/modeling/q2_model.py",
+      "paper_output/code/modeling/q3_model.py",
+      "paper_output/code/modeling/q4_model.py"
+    ],
+    "returncodes": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
   "artifacts": {
     "workflow_guard_report": {
       "path": "paper_output/qa/workflow_guard_report.json",
       "exists": true,
-      "bytes": 1184,
+      "bytes": 3195,
       "status": "INCOMPLETE"
     },
     "preflight_report": {
@@ -73,7 +101,9 @@
     },
     "run_manifest": {
       "path": "paper_output/results/run_manifest.json",
-      "exists": false
+      "exists": true,
+      "bytes": 5687,
+      "status": "PASS"
     },
     "evidence_gate_report": {
       "path": "paper_output/qa/evidence_gate_report.json",
@@ -95,12 +125,24 @@
   "latest_statuses": {
     "preflight": "PASS",
     "load_report": "PASS",
-    "run_manifest": null,
+    "run_manifest": "PASS",
     "evidence_gate": null,
     "authoring": null,
     "format_check": null
   },
   "blockers": [
-    "S4: 缺少建模代码目录：paper_output/code/modeling"
+    "S5: Q1: model_results 状态仍不是正式结果：needs_real_modeling",
+    "S5: Q2: model_results 状态仍不是正式结果：needs_real_modeling",
+    "S5: Q4: model_results 状态仍不是正式结果：needs_real_modeling",
+    "S5: metrics: 条目仍是草稿/待补状态：needs_real_modeling",
+    "S5: metrics: 条目仍是草稿/待补状态：needs_real_modeling",
+    "S5: metrics: 条目仍是草稿/待补状态：needs_real_modeling",
+    "S5: conclusions: 条目仍是草稿/待补状态：needs_real_modeling",
+    "S5: conclusions: 条目仍是草稿/待补状态：needs_real_modeling",
+    "S5: conclusions: 条目仍是草稿/待补状态：needs_real_modeling",
+    "S5: table_index: 条目仍是草稿/待补状态：draft_contract",
+    "S5: table_index: 条目仍是草稿/待补状态：draft_contract",
+    "S5: table_index: 条目仍是草稿/待补状态：draft_contract",
+    "S5: table_index: 条目仍是草稿/待补状态：draft_contract"
   ]
 }

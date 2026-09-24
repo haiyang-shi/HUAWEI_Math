@@ -1,0 +1,312 @@
+{
+  "dt_max_s": 0.5,
+  "time_cap_s": 300,
+  "rows": [
+    {
+      "q": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "heat_s": 0,
+      "success": false,
+      "reason": "voltage_below_0.30V",
+      "startup_s": null,
+      "aux_energy_j": 0.0,
+      "min_voltage_v": -0.5544410102930872,
+      "max_ice_fraction": 0.4036619158853168,
+      "terminal_min_temp_c": -11.868278762196383
+    },
+    {
+      "q": [
+        0.5,
+        0.32,
+        0.25,
+        0.32,
+        0.5
+      ],
+      "heat_s": 2,
+      "success": false,
+      "reason": "voltage_below_0.30V",
+      "startup_s": null,
+      "aux_energy_j": 94.5,
+      "min_voltage_v": -0.556229119357267,
+      "max_ice_fraction": 0.4043880229465096,
+      "terminal_min_temp_c": -11.14057054553058
+    },
+    {
+      "q": [
+        0.5,
+        0.32,
+        0.25,
+        0.32,
+        0.5
+      ],
+      "heat_s": 3,
+      "success": false,
+      "reason": "voltage_below_0.30V",
+      "startup_s": null,
+      "aux_energy_j": 141.75,
+      "min_voltage_v": -0.5565017836068383,
+      "max_ice_fraction": 0.40437650191189006,
+      "terminal_min_temp_c": -10.78679980262342
+    },
+    {
+      "q": [
+        0.5,
+        0.32,
+        0.25,
+        0.32,
+        0.5
+      ],
+      "heat_s": 3.5,
+      "success": false,
+      "reason": "voltage_below_0.30V",
+      "startup_s": null,
+      "aux_energy_j": 165.375,
+      "min_voltage_v": 0.29875982951748575,
+      "max_ice_fraction": 0.4042736582369115,
+      "terminal_min_temp_c": -10.79280259062989
+    },
+    {
+      "q": [
+        0.5,
+        0.32,
+        0.25,
+        0.32,
+        0.5
+      ],
+      "heat_s": 4,
+      "success": false,
+      "reason": "voltage_below_0.30V",
+      "startup_s": null,
+      "aux_energy_j": 189.0,
+      "min_voltage_v": -0.5578003467457178,
+      "max_ice_fraction": 0.4049816569386964,
+      "terminal_min_temp_c": -10.363669219073586
+    },
+    {
+      "q": [
+        0.5,
+        0.32,
+        0.25,
+        0.32,
+        0.5
+      ],
+      "heat_s": 6,
+      "success": false,
+      "reason": "voltage_below_0.30V",
+      "startup_s": null,
+      "aux_energy_j": 283.5,
+      "min_voltage_v": -0.5586673497780221,
+      "max_ice_fraction": 0.405198269675127,
+      "terminal_min_temp_c": -9.551542700650657
+    },
+    {
+      "q": [
+        0.4,
+        0.4,
+        0.4,
+        0.4,
+        0.4
+      ],
+      "heat_s": 15,
+      "success": true,
+      "reason": "startup",
+      "startup_s": 259.5,
+      "aux_energy_j": 750.0,
+      "min_voltage_v": 0.5104848433736061,
+      "max_ice_fraction": 0.40340776692621966,
+      "terminal_min_temp_c": 0.033473327210856496
+    },
+    {
+      "q": [
+        0.5,
+        0.5,
+        0.5,
+        0.5,
+        0.5
+      ],
+      "heat_s": 20,
+      "success": true,
+      "reason": "startup",
+      "startup_s": 253.0,
+      "aux_energy_j": 1250.0,
+      "min_voltage_v": 0.5717845984121882,
+      "max_ice_fraction": 0.3429296973753646,
+      "terminal_min_temp_c": 0.00046379595636381055
+    },
+    {
+      "q": [
+        0.8,
+        0.8,
+        0.8,
+        0.8,
+        0.8
+      ],
+      "heat_s": 60,
+      "success": true,
+      "reason": "startup",
+      "startup_s": 52.5,
+      "aux_energy_j": 5250.0,
+      "min_voltage_v": 0.6312067307576449,
+      "max_ice_fraction": 0.0,
+      "terminal_min_temp_c": 0.12753095919612178
+    },
+    {
+      "q": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "heat_s": 40,
+      "success": true,
+      "reason": "startup",
+      "startup_s": 142.0,
+      "aux_energy_j": 5000.0,
+      "min_voltage_v": 0.6385961162484145,
+      "max_ice_fraction": 0.0,
+      "terminal_min_temp_c": 0.014923467071753294
+    },
+    {
+      "q": [
+        0.5,
+        0.32,
+        0.25,
+        0.32,
+        0.5
+      ],
+      "heat_s": 15,
+      "success": true,
+      "reason": "startup",
+      "startup_s": 259.5,
+      "aux_energy_j": 708.75,
+      "min_voltage_v": 0.5024437985337054,
+      "max_ice_fraction": 0.4082895361775696,
+      "terminal_min_temp_c": 0.010778275632560508
+    },
+    {
+      "q": [
+        0.45,
+        0.35,
+        0.3,
+        0.35,
+        0.45
+      ],
+      "heat_s": 15,
+      "success": true,
+      "reason": "startup",
+      "startup_s": 259.5,
+      "aux_energy_j": 712.5,
+      "min_voltage_v": 0.5034242682233531,
+      "max_ice_fraction": 0.4078116070369228,
+      "terminal_min_temp_c": 0.009972393708665095
+    },
+    {
+      "q": [
+        0.55,
+        0.4,
+        0.3,
+        0.4,
+        0.55
+      ],
+      "heat_s": 12,
+      "success": true,
+      "reason": "startup",
+      "startup_s": 259.0,
+      "aux_energy_j": 660.0000000000001,
+      "min_voltage_v": 0.4474198301533273,
+      "max_ice_fraction": 0.41379888160897965,
+      "terminal_min_temp_c": 0.025915196241555805
+    },
+    {
+      "q": [
+        0.55,
+        0.35,
+        0.25,
+        0.35,
+        0.55
+      ],
+      "heat_s": 14,
+      "success": true,
+      "reason": "startup",
+      "startup_s": 259.5,
+      "aux_energy_j": 717.4999999999999,
+      "min_voltage_v": 0.5043004260858975,
+      "max_ice_fraction": 0.4073500075174826,
+      "terminal_min_temp_c": 0.01807033257114199
+    },
+    {
+      "q": [
+        0.45,
+        0.3,
+        0.25,
+        0.3,
+        0.45
+      ],
+      "heat_s": 16,
+      "success": true,
+      "reason": "startup",
+      "startup_s": 259.5,
+      "aux_energy_j": 700.0,
+      "min_voltage_v": 0.5002945187695201,
+      "max_ice_fraction": 0.4092190492720737,
+      "terminal_min_temp_c": 0.00398409348849782
+    },
+    {
+      "q": [
+        0.6,
+        0.35,
+        0.25,
+        0.35,
+        0.6
+      ],
+      "heat_s": 12,
+      "success": false,
+      "reason": "voltage_below_0.30V",
+      "startup_s": null,
+      "aux_energy_j": 645.0,
+      "min_voltage_v": -0.5701923486686705,
+      "max_ice_fraction": 0.41122522028402825,
+      "terminal_min_temp_c": -3.251871603649704
+    },
+    {
+      "q": [
+        0.5,
+        0.35,
+        0.25,
+        0.35,
+        0.5
+      ],
+      "heat_s": 14,
+      "success": true,
+      "reason": "startup",
+      "startup_s": 259.5,
+      "aux_energy_j": 682.5000000000001,
+      "min_voltage_v": 0.4928599958324153,
+      "max_ice_fraction": 0.4113143045142289,
+      "terminal_min_temp_c": 0.005869411231117283
+    },
+    {
+      "q": [
+        0.7,
+        0.5,
+        0.35,
+        0.5,
+        0.7
+      ],
+      "heat_s": 15,
+      "success": true,
+      "reason": "startup",
+      "startup_s": 256.0,
+      "aux_energy_j": 1031.25,
+      "min_voltage_v": 0.5466661600652342,
+      "max_ice_fraction": 0.370269864890269,
+      "terminal_min_temp_c": 0.017862954020699817
+    }
+  ]
+}

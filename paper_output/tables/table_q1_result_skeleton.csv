@@ -1,0 +1,4 @@
+﻿table_title,question_id,main_model,evidence_status,note
+参数估计表,Q1,有限体积多相冷启动模型：水/冰相变、有效孔隙率与扩散、反应面积反馈,needs_real_modeling,真实数值需要由当前赛题专用建模代码补齐。
+情景仿真结果表,Q1,有限体积多相冷启动模型：水/冰相变、有效孔隙率与扩散、反应面积反馈,needs_real_modeling,真实数值需要由当前赛题专用建模代码补齐。
+敏感性分析表,Q1,有限体积多相冷启动模型：水/冰相变、有效孔隙率与扩散、反应面积反馈,needs_real_modeling,真实数值需要由当前赛题专用建模代码补齐。
