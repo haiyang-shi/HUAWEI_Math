@@ -1,0 +1,109 @@
+{
+  "status": "completed_q1_only",
+  "generated_at": "2026-09-24T13:44:55",
+  "command": "D:/Anaconda/python.exe 问题1/run.py",
+  "calibration_condition": "-20℃",
+  "validation_condition": "-25℃",
+  "files": [
+    {
+      "path": "问题1/run.py",
+      "bytes": 14781,
+      "sha256": "12f3cc0be5f329c8f71ba5ca65b7b835d9e1b614c0c32751c4d992daddfca062"
+    },
+    {
+      "path": "问题1/model.py",
+      "bytes": 24591,
+      "sha256": "0fbda333d636b507215a0e556831707d7278cccda7967ddf3d585e665988348e"
+    },
+    {
+      "path": "问题1/data.py",
+      "bytes": 2008,
+      "sha256": "153581c0884fca74109ae1955baffecde4fa2685afb125608ecb22ce47916159"
+    },
+    {
+      "path": "problem_files/附件2.xlsx",
+      "bytes": 31021,
+      "sha256": "64ef38e8b348efbd9bb56357ce8a6901d70f6bd95a147fdcf434ef94fe4b47f2"
+    },
+    {
+      "path": "problem_files/附件1.xlsx",
+      "bytes": 13419,
+      "sha256": "06fece93cc86cd9110b5f24fbb3e1085f779d89338a6002d26c67616a4e4ed62"
+    },
+    {
+      "path": "problem_files/氢燃料电池低温冷启动建模与控制策略研究.pdf",
+      "bytes": 879657,
+      "sha256": "02fbe9584e27bff3367ffb9b52e65975457c8197d9f3a490abca634384a91b7a"
+    },
+    {
+      "path": "result/balance_and_ice_sensitivity.png",
+      "bytes": 137808,
+      "sha256": "18e4c294b0666c3eff8f3f36335077438f84cd005529e259952615fb7238af12"
+    },
+    {
+      "path": "result/field_minus20_35s.csv",
+      "bytes": 5718,
+      "sha256": "ff395e0758d19836ecae88dbce50ec735950dc2fd54a32fb23115d13d307e81b"
+    },
+    {
+      "path": "result/field_minus25_35s.csv",
+      "bytes": 5883,
+      "sha256": "96f94d18a80507ff2525979f0fb6cd7e2f8a9b8f893e63e92e9e148ecce6a28d"
+    },
+    {
+      "path": "result/field_profiles_35s.png",
+      "bytes": 68528,
+      "sha256": "23b6004886d5044ebbf5bbaf51e24ff025a4f0df74db7b594268b031e3c7815c"
+    },
+    {
+      "path": "result/metrics.json",
+      "bytes": 5062,
+      "sha256": "3ac9cb096592c15c22cc87b1114325b2a74b13b77db0c08f2abf64624ae52e15"
+    },
+    {
+      "path": "result/table_minus20.csv",
+      "bytes": 529,
+      "sha256": "64f79340de91cbd3c91543e13a396e63c54484b55a501808d839e6908e5f3cd1"
+    },
+    {
+      "path": "result/table_minus25.csv",
+      "bytes": 529,
+      "sha256": "e7b2ad456fd0f9a188509db3b659e0b61011b270747272724406768015d255fb"
+    },
+    {
+      "path": "result/trajectory_minus20.csv",
+      "bytes": 53096,
+      "sha256": "b5b3d24ea562c7232f501e4d9f5968d507ca7deda9f4fe4053982e9f756c0426"
+    },
+    {
+      "path": "result/trajectory_minus25.csv",
+      "bytes": 59003,
+      "sha256": "b106de200d98b7ef68a507c5ee1a9b85246e6b58ca57138a751abcd2f0825b37"
+    },
+    {
+      "path": "result/validation_curves.png",
+      "bytes": 261776,
+      "sha256": "ed8393832f8149f12c687d189530adfb11dc1bf7c9f7e29da1508ead89e0f147"
+    },
+    {
+      "path": "result/water_ice_dynamics.png",
+      "bytes": 88323,
+      "sha256": "0d425ce4e3be83d207006fb64a3e913da34dc3606a7c10e908ab43012fa297df"
+    },
+    {
+      "path": "result/参数使用与来源.csv",
+      "bytes": 1816,
+      "sha256": "2c8b1916c6ad5f8135b651b4d8b12705d49eeca67f5bf70ae8ebb30c59df14aa"
+    },
+    {
+      "path": "result/附件1参数原表.csv",
+      "bytes": 5150,
+      "sha256": "e3dae6582c6a225bfbe066638ee82c53195abd6207f3b2025211a5e39abb2110"
+    },
+    {
+      "path": "result/验证指标汇总.csv",
+      "bytes": 665,
+      "sha256": "a5456be1a18e267772fd3ea06d216c815d0834ae32a87efbc0a089b7950cdbfb"
+    }
+  ]
+}

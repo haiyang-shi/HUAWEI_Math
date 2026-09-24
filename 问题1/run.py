@@ -18,7 +18,7 @@ from data import EXPERIMENT_FILE, ROOT, load_experiments
 from model import ColdStartModel, Parameters
 
 
-OUT = Path(__file__).resolve().parent / 'results'
+OUT = ROOT / 'result'
 OUT.mkdir(exist_ok=True)
 
 
@@ -43,10 +43,10 @@ def write_csv(path, header, rows):
 def params_from_vector(x):
     return Parameters(
         j0_ref_am2=10 ** x[0],
-        plate_capacity_scale=x[1],
-        uptake_fraction=x[2],
-        hydration_activity_exponent=x[3],
-        dry_interface_ohm_m2=x[4] * 1e-4,
+        plate_capacity_scale=1.0,  # Attachment 1 bipolar-plate heat capacity, unchanged
+        uptake_fraction=x[1],
+        hydration_activity_exponent=x[2],
+        dry_interface_ohm_m2=x[3] * 1e-4,
     )
 
 
@@ -94,7 +94,7 @@ def checkpoint_table(exp, sim):
     return rows
 
 
-def plot_results(experiments, simulations, ice_sensitivity):
+def plot_results(experiments, simulations, ice_sensitivity, model):
     plt.rcParams.update({'figure.dpi': 150, 'savefig.dpi': 180, 'font.size': 10})
     fig, ax = plt.subplots(2, 2, figsize=(11, 7), constrained_layout=True)
     colors = {'-20℃': 'tab:blue', '-25℃': 'tab:orange'}
@@ -146,6 +146,20 @@ def plot_results(experiments, simulations, ice_sensitivity):
     fig.savefig(OUT / 'balance_and_ice_sensitivity.png')
     plt.close(fig)
 
+    x_um = (np.cumsum(model.dx) - model.dx / 2) * 1e6
+    fig, ax = plt.subplots(1, 2, figsize=(10, 3.7), constrained_layout=True)
+    for label, sim in simulations.items():
+        sample = int(np.argmin(np.abs(sim.time_s - 35.0)))
+        ax[0].plot(x_um, sim.temperature_field_c[sample], label=label)
+        ax[1].plot(x_um, sim.ice_field_kgm3[sample] / 920.0, label=label)
+    ax[0].set(xlabel='Through-plane position (μm)', ylabel='Local temperature (°C)')
+    ax[1].set(xlabel='Through-plane position (μm)', ylabel='Ice volume fraction')
+    for a in ax:
+        a.grid(alpha=.25)
+        a.legend()
+    fig.savefig(OUT / 'field_profiles_35s.png')
+    plt.close(fig)
+
 
 def main():
     experiments = load_experiments()
@@ -160,8 +174,8 @@ def main():
         return np.r_[(sim.voltage_v-calibration.voltage_v)/0.020,
                      (sim.temperature_c-calibration.temperature_c)/0.30]
 
-    initial = np.array([-1.0, 1.0, .75, 1.5, .6])
-    bounds = ([-2.0, .5, .15, 0.0, 0.0], [0.0, 1.8, 1.0, 4.0, 2.0])
+    initial = np.array([-1.0, .75, 1.5, .6])
+    bounds = ([-2.0, .15, 0.0, 0.0], [0.0, 1.0, 4.0, 2.0])
     coarse_fit = least_squares(residual, initial, bounds=bounds, loss='soft_l1',
                         f_scale=1.0, max_nfev=85, xtol=2e-5, ftol=2e-5, gtol=2e-5)
     model = ColdStartModel(mesh_factor=3)
@@ -230,7 +244,7 @@ def main():
                 'voltage_rmse_v': float(np.sqrt(np.mean((sim.voltage_v-calibration.voltage_v)**2))),
             }
             ice_curves[f'{key} x{factor}'] = sim.max_ice_fraction
-    plot_results(experiments, sims, ice_curves)
+    plot_results(experiments, sims, ice_curves, model)
 
     payload = {
         'status': 'computed_q1_only', 'generated_at': datetime.now().isoformat(timespec='seconds'),

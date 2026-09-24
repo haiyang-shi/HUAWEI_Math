@@ -1,0 +1,371 @@
+[
+  {
+    "j": 0.02,
+    "success": false,
+    "reason": "time_cap",
+    "t": 400.0,
+    "charge": 7.999999999999874,
+    "terminal_min_t": -7.837554542905764,
+    "minimum_voltage": 0.7480703920044945
+  },
+  {
+    "j": 0.025,
+    "success": false,
+    "reason": "time_cap",
+    "t": 400.0,
+    "charge": 9.999999999999966,
+    "terminal_min_t": -7.281544723706247,
+    "minimum_voltage": 0.7286620778369515
+  },
+  {
+    "j": 0.03,
+    "success": false,
+    "reason": "time_cap",
+    "t": 400.0,
+    "charge": 12.000000000000076,
+    "terminal_min_t": -6.722451640580061,
+    "minimum_voltage": 0.7111050627499261
+  },
+  {
+    "j": 0.035,
+    "success": false,
+    "reason": "time_cap",
+    "t": 400.0,
+    "charge": 14.000000000000052,
+    "terminal_min_t": -6.160406519692344,
+    "minimum_voltage": 0.6948256102436801
+  },
+  {
+    "j": 0.04,
+    "success": false,
+    "reason": "time_cap",
+    "t": 400.0,
+    "charge": 15.999999999999748,
+    "terminal_min_t": -5.5955417354009,
+    "minimum_voltage": 0.6794812507543698
+  },
+  {
+    "j": 0.045,
+    "success": false,
+    "reason": "time_cap",
+    "t": 400.0,
+    "charge": 18.000000000000366,
+    "terminal_min_t": -5.027997776549853,
+    "minimum_voltage": 0.6648510843895652
+  },
+  {
+    "j": 0.05,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 400.0,
+    "charge": 19.999999999999932,
+    "terminal_min_t": -4.457921528936765,
+    "minimum_voltage": 0.6507842822520078
+  },
+  {
+    "j": 0.055,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 363.6363636363653,
+    "charge": 20.0,
+    "terminal_min_t": -4.314335162710677,
+    "minimum_voltage": 0.6371732642269382
+  },
+  {
+    "j": 0.06,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 333.3333333333333,
+    "charge": 20.0,
+    "terminal_min_t": -4.183008706294629,
+    "minimum_voltage": 0.6239385971352933
+  },
+  {
+    "j": 0.065,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 307.69230769230774,
+    "charge": 20.0,
+    "terminal_min_t": -4.061536330799299,
+    "minimum_voltage": 0.6110199585442067
+  },
+  {
+    "j": 0.07,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 285.7142857142847,
+    "charge": 20.0,
+    "terminal_min_t": -3.948115352302068,
+    "minimum_voltage": 0.5983704588720544
+  },
+  {
+    "j": 0.075,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 266.66666666666606,
+    "charge": 20.0,
+    "terminal_min_t": -3.841366324165108,
+    "minimum_voltage": 0.5859529271351862
+  },
+  {
+    "j": 0.08,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 250.0,
+    "charge": 19.99999999999975,
+    "terminal_min_t": -3.7402142436305894,
+    "minimum_voltage": 0.5737373978681093
+  },
+  {
+    "j": 0.085,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 235.29411764705696,
+    "charge": 20.0,
+    "terminal_min_t": -3.6438074829105176,
+    "minimum_voltage": 0.5616993612571898
+  },
+  {
+    "j": 0.09,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 222.2222222222208,
+    "charge": 20.0,
+    "terminal_min_t": -3.5514626543079544,
+    "minimum_voltage": 0.5498185142014336
+  },
+  {
+    "j": 0.095,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 210.52631578947492,
+    "charge": 20.0,
+    "terminal_min_t": -3.462623670730352,
+    "minimum_voltage": 0.5380778495014115
+  },
+  {
+    "j": 0.1,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 199.99999999999852,
+    "charge": 20.0,
+    "terminal_min_t": -3.37683318658776,
+    "minimum_voltage": 0.5264629789454588
+  },
+  {
+    "j": 0.105,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 190.47619047619105,
+    "charge": 20.0,
+    "terminal_min_t": -3.2937115045474457,
+    "minimum_voltage": 0.5149616217226265
+  },
+  {
+    "j": 0.11,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 181.8181818181825,
+    "charge": 20.0,
+    "terminal_min_t": -3.212940438084331,
+    "minimum_voltage": 0.5035632119562168
+  },
+  {
+    "j": 0.115,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 173.9130434782611,
+    "charge": 20.0,
+    "terminal_min_t": -3.1342511492111385,
+    "minimum_voltage": 0.49225859354973134
+  },
+  {
+    "j": 0.12,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 166.66666666666703,
+    "charge": 20.0,
+    "terminal_min_t": -3.0574150072552584,
+    "minimum_voltage": 0.48103978002545444
+  },
+  {
+    "j": 0.125,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 159.99999999999997,
+    "charge": 20.0,
+    "terminal_min_t": -2.982235920855885,
+    "minimum_voltage": 0.46989976342131756
+  },
+  {
+    "j": 0.13,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 153.84615384615356,
+    "charge": 20.0,
+    "terminal_min_t": -2.9085456075641787,
+    "minimum_voltage": 0.4588323606910978
+  },
+  {
+    "j": 0.135,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 148.14814814814795,
+    "charge": 20.0,
+    "terminal_min_t": -2.836197731569939,
+    "minimum_voltage": 0.44783208910861666
+  },
+  {
+    "j": 0.14,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 142.85714285714243,
+    "charge": 20.0,
+    "terminal_min_t": -2.765065225879539,
+    "minimum_voltage": 0.4368940643422747
+  },
+  {
+    "j": 0.145,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 137.9310344827583,
+    "charge": 20.0,
+    "terminal_min_t": -2.6950371231855,
+    "minimum_voltage": 0.426013916423367
+  },
+  {
+    "j": 0.15,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 133.333333333334,
+    "charge": 20.0,
+    "terminal_min_t": -2.6260164331395686,
+    "minimum_voltage": 0.41518771996603654
+  },
+  {
+    "j": 0.155,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 129.03225806451564,
+    "charge": 20.0,
+    "terminal_min_t": -2.55791687069933,
+    "minimum_voltage": 0.40441193583330237
+  },
+  {
+    "j": 0.16,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 125.0,
+    "charge": 19.999999999999925,
+    "terminal_min_t": -2.490663320070098,
+    "minimum_voltage": 0.3936833620675344
+  },
+  {
+    "j": 0.165,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 121.2121212121217,
+    "charge": 20.0,
+    "terminal_min_t": -2.4241895281209054,
+    "minimum_voltage": 0.38299909237397023
+  },
+  {
+    "j": 0.17,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 117.64705882352874,
+    "charge": 20.0,
+    "terminal_min_t": -2.358434817779937,
+    "minimum_voltage": 0.372356480803716
+  },
+  {
+    "j": 0.175,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 114.28571428571439,
+    "charge": 20.0,
+    "terminal_min_t": -2.2933471053509606,
+    "minimum_voltage": 0.3617531115574774
+  },
+  {
+    "j": 0.18,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 111.11111111111124,
+    "charge": 20.0,
+    "terminal_min_t": -2.2288789819418184,
+    "minimum_voltage": 0.35118677304410517
+  },
+  {
+    "j": 0.185,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 108.10810810810811,
+    "charge": 20.0,
+    "terminal_min_t": -2.164988762657458,
+    "minimum_voltage": 0.3406554354942033
+  },
+  {
+    "j": 0.19,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 105.26315789473685,
+    "charge": 20.0,
+    "terminal_min_t": -2.101638940511009,
+    "minimum_voltage": 0.3301572315597247
+  },
+  {
+    "j": 0.195,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 102.56410256410243,
+    "charge": 20.0,
+    "terminal_min_t": -2.0387948103022495,
+    "minimum_voltage": 0.3196904394340158
+  },
+  {
+    "j": 0.2,
+    "success": false,
+    "reason": "charge_limit",
+    "t": 99.99999999999991,
+    "charge": 20.0,
+    "terminal_min_t": -1.976426747369544,
+    "minimum_voltage": 0.309253468109294
+  },
+  {
+    "j": 0.205,
+    "success": false,
+    "reason": "voltage_below_0.30V",
+    "t": 0.0,
+    "charge": 0.0,
+    "terminal_min_t": -9.999999999999886,
+    "minimum_voltage": 0.29884484445478293
+  },
+  {
+    "j": 0.21,
+    "success": false,
+    "reason": "voltage_below_0.30V",
+    "t": 0.0,
+    "charge": 0.0,
+    "terminal_min_t": -9.999999999999886,
+    "minimum_voltage": 0.2884632018521809
+  },
+  {
+    "j": 0.215,
+    "success": false,
+    "reason": "voltage_below_0.30V",
+    "t": 0.0,
+    "charge": 0.0,
+    "terminal_min_t": -9.999999999999886,
+    "minimum_voltage": 0.2781072701685263
+  },
+  {
+    "j": 0.22,
+    "success": false,
+    "reason": "voltage_below_0.30V",
+    "t": 0.0,
+    "charge": 0.0,
+    "terminal_min_t": -9.999999999999886,
+    "minimum_voltage": 0.26777586688193344
+  }
+]

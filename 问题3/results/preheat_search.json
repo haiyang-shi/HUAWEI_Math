@@ -1,0 +1,195 @@
+{
+  "immediate_0p3_Acm2": {
+    "runs": [
+      {
+        "start": [
+          1,
+          1,
+          1,
+          200
+        ],
+        "parameters": [
+          0.9999999714880274,
+          0.9999999712529558,
+          0.9999999855682693,
+          194.88835751069067
+        ],
+        "energy_j": 24361.044060566142,
+        "min_temperature_c": 63.57880595491662,
+        "min_loaded_voltage_v": 0.3005000193168357,
+        "feasible_surrogate": true,
+        "solver_success": true,
+        "message": "Optimization terminated successfully",
+        "evaluations": 35
+      },
+      {
+        "start": [
+          1,
+          0.7,
+          0.7,
+          220
+        ],
+        "parameters": [
+          0.999999934108769,
+          0.999999999439204,
+          0.9999985478723838,
+          194.88835455895438
+        ],
+        "energy_j": 24361.036597263945,
+        "min_temperature_c": 63.57877827308906,
+        "min_loaded_voltage_v": 0.30049995345640357,
+        "feasible_surrogate": true,
+        "solver_success": true,
+        "message": "Optimization terminated successfully",
+        "evaluations": 368
+      },
+      {
+        "start": [
+          0.9,
+          0.9,
+          0.9,
+          250
+        ],
+        "parameters": [
+          0.9999999921648721,
+          0.9999998789368931,
+          0.9999999997368443,
+          194.88832932410196
+        ],
+        "energy_j": 24361.039908192513,
+        "min_temperature_c": 63.57879225922386,
+        "min_loaded_voltage_v": 0.30049998673212863,
+        "feasible_surrogate": true,
+        "solver_success": true,
+        "message": "Optimization terminated successfully",
+        "evaluations": 36
+      },
+      {
+        "start": [
+          1,
+          0.5,
+          0.3,
+          300
+        ],
+        "parameters": [
+          0.9999999027858786,
+          0.9999999999917628,
+          1.0,
+          194.88833028572196
+        ],
+        "energy_j": 24361.040338340088,
+        "min_temperature_c": 63.57879366663204,
+        "min_loaded_voltage_v": 0.3004999900806253,
+        "feasible_surrogate": true,
+        "solver_success": true,
+        "message": "Optimization terminated successfully",
+        "evaluations": 41
+      }
+    ],
+    "best": {
+      "start": [
+        1,
+        0.7,
+        0.7,
+        220
+      ],
+      "parameters": [
+        0.999999934108769,
+        0.999999999439204,
+        0.9999985478723838,
+        194.88835455895438
+      ],
+      "energy_j": 24361.036597263945,
+      "min_temperature_c": 63.57877827308906,
+      "min_loaded_voltage_v": 0.30049995345640357,
+      "feasible_surrogate": true,
+      "solver_success": true,
+      "message": "Optimization terminated successfully",
+      "evaluations": 368
+    }
+  },
+  "temperature_ready_only": {
+    "runs": [
+      {
+        "start": [
+          1,
+          1,
+          1,
+          50
+        ],
+        "parameters": [
+          0.9999999988175545,
+          0.9999999986808118,
+          0.9999999994161645,
+          46.44190034340698
+        ],
+        "energy_j": 5805.237536438981,
+        "min_temperature_c": 0.010000091595301797,
+        "min_immediate_step_voltage_v": 0.13577133485820836,
+        "feasible_surrogate": true,
+        "solver_success": true,
+        "evaluations": 116
+      },
+      {
+        "start": [
+          1,
+          0.8,
+          0.8,
+          65
+        ],
+        "parameters": [
+          1.0,
+          1.0,
+          1.0,
+          46.441898660385675
+        ],
+        "energy_j": 5805.237332548209,
+        "min_temperature_c": 0.009999324619258232,
+        "min_immediate_step_voltage_v": 0.13577133258991705,
+        "feasible_surrogate": true,
+        "solver_success": false,
+        "evaluations": 58
+      },
+      {
+        "start": [
+          0.8,
+          0.8,
+          0.8,
+          80
+        ],
+        "parameters": [
+          0.999999995440588,
+          0.9999999954405603,
+          0.99999999772024,
+          46.441900342558235
+        ],
+        "energy_j": 5805.23751899803,
+        "min_temperature_c": 0.010000000327408998,
+        "min_immediate_step_voltage_v": 0.13577133458828822,
+        "feasible_surrogate": true,
+        "solver_success": true,
+        "evaluations": 72
+      }
+    ],
+    "best": {
+      "start": [
+        1,
+        0.8,
+        0.8,
+        65
+      ],
+      "parameters": [
+        1.0,
+        1.0,
+        1.0,
+        46.441898660385675
+      ],
+      "energy_j": 5805.237332548209,
+      "min_temperature_c": 0.009999324619258232,
+      "min_immediate_step_voltage_v": 0.13577133258991705,
+      "feasible_surrogate": true,
+      "solver_success": false,
+      "evaluations": 58
+    }
+  }
+}

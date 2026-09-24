@@ -1,0 +1,4 @@
+﻿strategy,parameters,success,startup_s,charge_Ccm2,max_current_Acm2,min_cell_voltage_V,max_local_ice_fraction,outcome
+constant,[0.2],False,,20.0,0.2,0.3092535198458407,0.0,charge_limit
+linear,"[0.17, 0.5, 5.0]",True,34.900000000000155,16.625000000000124,0.5,0.30438487816669524,0.002415174290015445,startup
+step,"[0.2, 0.38, 0.5, 4.0, 6.0]",True,36.45000000000007,16.785000000000114,0.5,0.3003733222404348,0.0028072880409721586,startup

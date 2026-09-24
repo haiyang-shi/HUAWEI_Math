@@ -1,0 +1,81 @@
+{
+  "status": "completed_model_prediction",
+  "command": "D:\\Anaconda\\python.exe 问题3/finalize.py",
+  "files": [
+    {
+      "path": "问题3/aux_model.py",
+      "bytes": 13490,
+      "sha256": "10205b715d932fe46c7a0c622a0135e9bd6b8419e63f6cf6ddd9e7f55d85a2fa"
+    },
+    {
+      "path": "问题3/search.py",
+      "bytes": 6221,
+      "sha256": "eefac2585bf2957ecfa08117b022940b31f0c8684f93042aa8c9d030760d3d5e"
+    },
+    {
+      "path": "问题3/finalize.py",
+      "bytes": 8812,
+      "sha256": "8074d374f814806da0d70bf543c994dff28f8d87c5b91f61b01503e0e7224647"
+    },
+    {
+      "path": "问题1/model.py",
+      "bytes": 24591,
+      "sha256": "0fbda333d636b507215a0e556831707d7278cccda7967ddf3d585e665988348e"
+    },
+    {
+      "path": "问题2/stack_model.py",
+      "bytes": 13965,
+      "sha256": "1d5606a1fec7620ddf6801ee4cc3416ed8c1a8d8bddbb3464214d67725ec3a03"
+    },
+    {
+      "path": "result/metrics.json",
+      "bytes": 5062,
+      "sha256": "3ac9cb096592c15c22cc87b1114325b2a74b13b77db0c08f2abf64624ae52e15"
+    },
+    {
+      "path": "问题3/问题3的解决方案.md",
+      "bytes": 21835,
+      "sha256": "dfed43f0ac124b0354ff0e3b363326f5a8470d85c6b9943b3c156deac3204b44"
+    },
+    {
+      "path": "问题3/results/preheat_search.json",
+      "bytes": 4887,
+      "sha256": "a552511218285ce437b02c4ab984866d0d959e7e56c62e398e59d56a89cc41f8"
+    },
+    {
+      "path": "问题3/results/table4.json",
+      "bytes": 3509,
+      "sha256": "44f8765c3c17dce20b869683bc720f10104b0bbafa07f5c70d494c2a2a4cc8f3"
+    },
+    {
+      "path": "问题3/results/table4.csv",
+      "bytes": 470,
+      "sha256": "14ce720d661f3200feef1c5f27e2617dc5cc694241b272dfca419cd301698e9a"
+    },
+    {
+      "path": "问题3/results/preheat_trajectory.csv",
+      "bytes": 106266,
+      "sha256": "36b4151183aeff098cbe936a3ce4329de523b0c81a65d9294ae5cc41a9f01345"
+    },
+    {
+      "path": "问题3/results/cooperative_trajectory.csv",
+      "bytes": 202533,
+      "sha256": "269beab43568fe497bfd17c22fd245a678deb8dda4b9219a1c3b79042916d020"
+    },
+    {
+      "path": "问题3/results/strategy_trajectories.png",
+      "bytes": 248879,
+      "sha256": "0b072ff8c9ad3f9f0fef7bfaa2a87fd39dc01c1780d2213c97fa8b86d55ecaaf"
+    },
+    {
+      "path": "问题3/results/energy_distribution.png",
+      "bytes": 31727,
+      "sha256": "3cd9b2056c34b2b03f7365c303bbc9e1ea54477bf7d8bc0149739279700dfbcc"
+    },
+    {
+      "path": "问题3/results/interpretation_checks.json",
+      "bytes": 5160,
+      "sha256": "22e06fb31a94a2e18581181f500a6a383ff85d50a13e895ff68e2ca02c18b092"
+    }
+  ]
+}

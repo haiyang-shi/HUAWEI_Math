@@ -1,0 +1,136 @@
+{
+  "status": "completed_q2_model_prediction",
+  "command": "D:/Anaconda/python.exe 问题2/finalize.py",
+  "mesh_factor": 3,
+  "table3_max_step_s": 0.05,
+  "boundary_max_step_s": 0.0125,
+  "strategy_parameters": {
+    "constant": [
+      0.2
+    ],
+    "linear": [
+      0.17,
+      0.5,
+      5.0
+    ],
+    "step": [
+      0.2,
+      0.38,
+      0.5,
+      4.0,
+      6.0
+    ]
+  },
+  "files": [
+    {
+      "path": "问题2/stack_model.py",
+      "bytes": 13965,
+      "sha256": "1d5606a1fec7620ddf6801ee4cc3416ed8c1a8d8bddbb3464214d67725ec3a03"
+    },
+    {
+      "path": "问题2/run.py",
+      "bytes": 7859,
+      "sha256": "a880398d7671430694dcbf80e4859a92590f1c684d35f506118ce182c9e8a862"
+    },
+    {
+      "path": "问题2/finalize.py",
+      "bytes": 13840,
+      "sha256": "d389a2ef9f7fdd515c02bd450aff8747660387ee047a1e7cc6791c67ef019e7c"
+    },
+    {
+      "path": "问题2/问题2的解决方案.md",
+      "bytes": 16869,
+      "sha256": "cb7710ea5cb4556239d30ed8c7189bf4a782e961a46bdbc621ecf8ef771ffe66"
+    },
+    {
+      "path": "result/metrics.json",
+      "bytes": 5062,
+      "sha256": "3ac9cb096592c15c22cc87b1114325b2a74b13b77db0c08f2abf64624ae52e15"
+    },
+    {
+      "path": "问题2/results/boundary_11.20.csv",
+      "bytes": 133187,
+      "sha256": "c6e87611dbf7d80534e8dc5973529400cd6a5da4ddffa32e1506732bf392886d"
+    },
+    {
+      "path": "问题2/results/boundary_11.24.csv",
+      "bytes": 133833,
+      "sha256": "e2e7b7556e376c22445cac759d11daa5013143eec461b4b4bbb28181ee1cf3c9"
+    },
+    {
+      "path": "问题2/results/boundary_11.26.csv",
+      "bytes": 134215,
+      "sha256": "d4e72802433404c9f641ebd38878059eaae2ff63c556e55808ea3d010454ae4f"
+    },
+    {
+      "path": "问题2/results/boundary_11.27.csv",
+      "bytes": 134262,
+      "sha256": "1490dd6b79214573812a9ee9b33575ab3bc2e4af5abbe4358143c0b5179c3559"
+    },
+    {
+      "path": "问题2/results/boundary_11.28.csv",
+      "bytes": 134527,
+      "sha256": "c84bd0b39673674b7ea6aef86d7241d9072ed1343b25b6d0e72ebc0b87b75419"
+    },
+    {
+      "path": "问题2/results/boundary_11.29.csv",
+      "bytes": 134587,
+      "sha256": "f2e50b559f7302870400b2fb4dc98cf6992eb24ad005f06c107a1a06f8f3ca2d"
+    },
+    {
+      "path": "问题2/results/constant_scan.json",
+      "bytes": 8907,
+      "sha256": "541ba007459f508e30212b3461bb0df3e6a58758def25fa5365908ad4ced7fa4"
+    },
+    {
+      "path": "问题2/results/constant_trajectory.csv",
+      "bytes": 291351,
+      "sha256": "ca60e9ceca703f0e491189a5619c81334547c835f721a4ec2aa2d2fd7f8a6637"
+    },
+    {
+      "path": "问题2/results/linear_trajectory.csv",
+      "bytes": 111367,
+      "sha256": "e5468bd56b711485aae40f48afa48f1cdbe8706a4557f7d03a06343c98c867f5"
+    },
+    {
+      "path": "问题2/results/sensitivity.json",
+      "bytes": 8843,
+      "sha256": "19d157b38b99a1e05aa7588ae0a6ab94f9ac1963d056b046d98cf845bbfd7a4c"
+    },
+    {
+      "path": "问题2/results/step_trajectory.csv",
+      "bytes": 115282,
+      "sha256": "2a7a4d97b3ed49975097820e521f654887d6be32894cf123421f19241f6ca1d4"
+    },
+    {
+      "path": "问题2/results/strategy_comparison.png",
+      "bytes": 188523,
+      "sha256": "112dc008138008f596ce92ac78ad2cddd5d79f82243a8543d46f2b31e0b3b623"
+    },
+    {
+      "path": "问题2/results/table3.csv",
+      "bytes": 442,
+      "sha256": "cb1536570907c4d8c5bb4c634de8a49a57b98cff50136d484ee17b05bde99a6d"
+    },
+    {
+      "path": "问题2/results/table3.json",
+      "bytes": 3204,
+      "sha256": "df7bfcc772e1fe04e49faf4d54eee213bf7b5777687e7c2892a653bcc6305598"
+    },
+    {
+      "path": "问题2/results/temperature_boundary.csv",
+      "bytes": 705,
+      "sha256": "64223eb14e015fc7909824f893f760ccb96b605d4561503c7916ecd0eb9be2d4"
+    },
+    {
+      "path": "问题2/results/temperature_boundary.json",
+      "bytes": 6477,
+      "sha256": "52201cd6b98715c6e1cb7c7513a7284f9d5fb3edeafdca0d709f42d313c8707a"
+    },
+    {
+      "path": "问题2/问题2求解结果与分析.md",
+      "bytes": 5352,
+      "sha256": "b49fa05cb2ea29078fcb5a589ed31b2bdf75595f78bf53b7809a92a96f52f6a6"
+    }
+  ]
+}

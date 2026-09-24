@@ -1,0 +1,306 @@
+[
+  {
+    "family": "linear",
+    "parameters": [
+      0.17,
+      0.5,
+      5.0
+    ],
+    "initial_c": -10,
+    "success": true,
+    "reason": "startup",
+    "startup_s": 34.99999999999996,
+    "charge_c_cm2": 16.67499999999997,
+    "max_current_acm2": 0.5,
+    "minimum_voltage_v": 0.3047714842116726,
+    "maximum_local_ice_fraction": 0.0037682575800526644,
+    "coldest_cell": 1,
+    "lowest_voltage_cell": 1,
+    "terminal_temperature_c": [
+      0.0060327448448447285,
+      4.255038229872184,
+      5.635085426575245,
+      4.255038229872184,
+      0.0060327448448447285
+    ],
+    "terminal_endplate_temperature_c": [
+      -5.853170957907821,
+      -5.853170957906855
+    ],
+    "max_water_balance_kg_m2": 2.5153490401663703e-17,
+    "energy_balance_j": -1.5838850231375545e-09,
+    "heat_generated_j": 1813.574746574333,
+    "latent_heat_j": 0.03989435329432245,
+    "heat_lost_j": 11.81116049343269,
+    "heat_stored_j": 1801.8034804357785,
+    "min_gas_molm3": 9.02730949679569,
+    "max_pore_occupancy": 0.027226394375587628,
+    "case": "base"
+  },
+  {
+    "family": "linear",
+    "parameters": [
+      0.17,
+      0.5,
+      5.0
+    ],
+    "initial_c": -10,
+    "success": true,
+    "reason": "startup",
+    "startup_s": 34.99999999999996,
+    "charge_c_cm2": 16.67499999999997,
+    "max_current_acm2": 0.5,
+    "minimum_voltage_v": 0.3047714842116726,
+    "maximum_local_ice_fraction": 0.0007789401239624804,
+    "coldest_cell": 1,
+    "lowest_voltage_cell": 1,
+    "terminal_temperature_c": [
+      0.003409153374889229,
+      4.25344367667725,
+      5.633835337689163,
+      4.25344367667725,
+      0.003409153374889229
+    ],
+    "terminal_endplate_temperature_c": [
+      -5.853849300108891,
+      -5.853849300108209
+    ],
+    "max_water_balance_kg_m2": 3.0357660829594124e-17,
+    "energy_balance_j": -1.6816557035781443e-09,
+    "heat_generated_j": 1813.3228905212106,
+    "latent_heat_j": 0.008364450800070323,
+    "heat_lost_j": 11.81012996928341,
+    "heat_stored_j": 1801.521125004409,
+    "min_gas_molm3": 9.027349462657464,
+    "max_pore_occupancy": 0.022307900867245153,
+    "case": "freeze_x0.2"
+  },
+  {
+    "family": "linear",
+    "parameters": [
+      0.17,
+      0.5,
+      5.0
+    ],
+    "initial_c": -10,
+    "success": true,
+    "reason": "startup",
+    "startup_s": 34.99999999999996,
+    "charge_c_cm2": 16.67499999999997,
+    "max_current_acm2": 0.5,
+    "minimum_voltage_v": 0.3047714842116726,
+    "maximum_local_ice_fraction": 0.016314719106047967,
+    "coldest_cell": 1,
+    "lowest_voltage_cell": 1,
+    "terminal_temperature_c": [
+      0.01619024078553366,
+      4.261211017684104,
+      5.639925539955925,
+      4.261211017684104,
+      0.01619024078553366
+    ],
+    "terminal_endplate_temperature_c": [
+      -5.850542453042749,
+      -5.850542453041442
+    ],
+    "max_water_balance_kg_m2": 3.0357660829594124e-17,
+    "energy_balance_j": -1.8580976757220924e-09,
+    "heat_generated_j": 1814.5501449849323,
+    "latent_heat_j": 0.16209810760812537,
+    "heat_lost_j": 11.815170901829019,
+    "heat_stored_j": 1802.8970721925693,
+    "min_gas_molm3": 9.027154759699663,
+    "max_pore_occupancy": 0.05174839364038429,
+    "case": "freeze_x5"
+  },
+  {
+    "family": "linear",
+    "parameters": [
+      0.17,
+      0.5,
+      5.0
+    ],
+    "initial_c": -10,
+    "success": true,
+    "reason": "startup",
+    "startup_s": 34.99999999999996,
+    "charge_c_cm2": 16.67499999999997,
+    "max_current_acm2": 0.5,
+    "minimum_voltage_v": 0.3047714842116726,
+    "maximum_local_ice_fraction": 0.007960919838075411,
+    "coldest_cell": 1,
+    "lowest_voltage_cell": 1,
+    "terminal_temperature_c": [
+      0.008927730562049874,
+      4.256694495953695,
+      5.636335914875303,
+      4.256694495953695,
+      0.008927730562049874
+    ],
+    "terminal_endplate_temperature_c": [
+      -5.852493370708828,
+      -5.8524933707075775
+    ],
+    "max_water_balance_kg_m2": 2.47198095326695e-17,
+    "energy_balance_j": -1.4426859706873074e-09,
+    "heat_generated_j": 1813.831210568123,
+    "latent_heat_j": 0.07678318984834363,
+    "heat_lost_j": 11.812095098775698,
+    "heat_stored_j": 1802.0958986606383,
+    "min_gas_molm3": 9.027269518518223,
+    "max_pore_occupancy": 0.06268423851849206,
+    "case": "liquid_transport_x0.2"
+  },
+  {
+    "family": "linear",
+    "parameters": [
+      0.17,
+      0.5,
+      5.0
+    ],
+    "initial_c": -10,
+    "success": true,
+    "reason": "startup",
+    "startup_s": 34.99999999999996,
+    "charge_c_cm2": 16.67499999999997,
+    "max_current_acm2": 0.5,
+    "minimum_voltage_v": 0.3047714842116726,
+    "maximum_local_ice_fraction": 0.0010300559559020916,
+    "coldest_cell": 1,
+    "lowest_voltage_cell": 1,
+    "terminal_temperature_c": [
+      0.0036798024555650954,
+      4.253622045552618,
+      5.633982184469858,
+      4.253622045552618,
+      0.0036798024555650954
+    ],
+    "terminal_endplate_temperature_c": [
+      -5.85376891938995,
+      -5.853768919388301
+    ],
+    "max_water_balance_kg_m2": 2.1250362580715887e-17,
+    "energy_balance_j": -1.7555521480971947e-09,
+    "heat_generated_j": 1813.3519085788384,
+    "latent_heat_j": 0.011367805827695183,
+    "heat_lost_j": 11.810269976882534,
+    "heat_stored_j": 1801.553006409539,
+    "min_gas_molm3": 9.027344767886541,
+    "max_pore_occupancy": 0.006919519702779288,
+    "case": "liquid_transport_x5"
+  },
+  {
+    "family": "linear",
+    "parameters": [
+      0.17,
+      0.5,
+      5.0
+    ],
+    "initial_c": -10,
+    "success": true,
+    "reason": "startup",
+    "startup_s": 34.99999999999996,
+    "charge_c_cm2": 16.67499999999997,
+    "max_current_acm2": 0.5,
+    "minimum_voltage_v": 0.3053142353749877,
+    "maximum_local_ice_fraction": 0.0037861383321887666,
+    "coldest_cell": 1,
+    "lowest_voltage_cell": 1,
+    "terminal_temperature_c": [
+      0.0012130013536761908,
+      4.251287650072641,
+      5.631697572588109,
+      4.251287650072641,
+      0.0012130013536761908
+    ],
+    "terminal_endplate_temperature_c": [
+      -5.8552243214282385,
+      -5.855224321427613
+    ],
+    "max_water_balance_kg_m2": 2.3418766925686896e-17,
+    "energy_balance_j": -2.2787389752920717e-09,
+    "heat_generated_j": 1812.848546052102,
+    "latent_heat_j": 0.0401355081334268,
+    "heat_lost_j": 11.8052101015174,
+    "heat_stored_j": 1801.0834714609969,
+    "min_gas_molm3": 9.027417808710378,
+    "max_pore_occupancy": 0.027312475458277325,
+    "case": "terminal_concentration_x1"
+  },
+  {
+    "family": "linear",
+    "parameters": [
+      0.17,
+      0.5,
+      5.0
+    ],
+    "initial_c": -10,
+    "success": false,
+    "reason": "charge_limit",
+    "startup_s": null,
+    "charge_c_cm2": 20.0,
+    "max_current_acm2": 0.5,
+    "minimum_voltage_v": 0.3045289576275041,
+    "maximum_local_ice_fraction": 0.012844007540647004,
+    "coldest_cell": 1,
+    "lowest_voltage_cell": 1,
+    "terminal_temperature_c": [
+      -0.4032103040028687,
+      2.0124672410384505,
+      2.816669012646514,
+      2.0124672410384505,
+      -0.4032103040028687
+    ],
+    "terminal_endplate_temperature_c": [
+      -3.6058745538177277,
+      -3.605874553819149
+    ],
+    "max_water_balance_kg_m2": 4.683753385137379e-17,
+    "energy_balance_j": -6.616573955398053e-10,
+    "heat_generated_j": 2144.7550363201694,
+    "latent_heat_j": 0.17275167742110123,
+    "heat_lost_j": 23.702421433254415,
+    "heat_stored_j": 2121.225366564998,
+    "min_gas_molm3": 9.118325040143773,
+    "max_pore_occupancy": 0.06259433395724034,
+    "case": "thermal_resistance_x0.5"
+  },
+  {
+    "family": "linear",
+    "parameters": [
+      0.17,
+      0.5,
+      5.0
+    ],
+    "initial_c": -10,
+    "success": true,
+    "reason": "startup",
+    "startup_s": 25.99999999999994,
+    "charge_c_cm2": 12.174999999999974,
+    "max_current_acm2": 0.5,
+    "minimum_voltage_v": 0.30493692953931645,
+    "maximum_local_ice_fraction": 0.0,
+    "coldest_cell": 1,
+    "lowest_voltage_cell": 1,
+    "terminal_temperature_c": [
+      0.015287749345304746,
+      4.6903072098112375,
+      5.967687395099006,
+      4.6903072098112375,
+      0.015287749345304746
+    ],
+    "terminal_endplate_temperature_c": [
+      -8.143903480804795,
+      -8.143903480805534
+    ],
+    "max_water_balance_kg_m2": 2.0816681711721685e-17,
+    "energy_balance_j": -1.2464624887797982e-09,
+    "heat_generated_j": 1371.7204949621162,
+    "latent_heat_j": 0.0,
+    "heat_lost_j": 3.622609207916753,
+    "heat_stored_j": 1368.097885755446,
+    "min_gas_molm3": 9.016688102100476,
+    "max_pore_occupancy": 0.0,
+    "case": "thermal_resistance_x2"
+  }
+]

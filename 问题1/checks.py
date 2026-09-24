@@ -10,8 +10,8 @@ import numpy as np
 from data import load_experiments
 
 
-OUT = Path(__file__).resolve().parent / 'results'
-ROOT = OUT.parents[1]
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / 'result'
 
 
 def read_csv(path):
@@ -30,6 +30,12 @@ def main():
     assert metrics['calibration_success']
     assert metrics['calibration_condition'] == '-20℃'
     assert metrics['independent_validation_condition'] == '-25℃'
+    fixed = metrics['parameters']
+    assert fixed['plate_capacity_scale'] == 1.0
+    assert fixed['liquid_diffusivity_scale'] == 1.0
+    assert fixed['ice_area_exponent'] == 3.5
+    assert fixed['membrane_lambda'] == 3.0
+    assert fixed['contact_ohm_m2'] == 1e-6
     for label, stem in [('-20℃', 'minus20'), ('-25℃', 'minus25')]:
         exp = experiments[label]
         rows = read_csv(OUT / f'trajectory_{stem}.csv')
