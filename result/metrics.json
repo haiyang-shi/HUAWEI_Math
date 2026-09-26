@@ -1,7 +1,7 @@
 {
   "status": "computed_q1_only",
-  "generated_at": "2026-09-24T13:44:55",
-  "source_statement": "problem_files/氢燃料电池低温冷启动建模与控制策略研究.pdf",
+  "generated_at": "2026-09-26T14:25:33",
+  "source_statement": "氢燃料电池低温冷启动建模与控制策略研究.pdf",
   "calibration_condition": "-20℃",
   "independent_validation_condition": "-25℃",
   "calibration_success": true,

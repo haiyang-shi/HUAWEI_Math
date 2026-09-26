@@ -2,8 +2,9 @@
 
 The heater is represented by a mean-temperature increment in each cell.  This
 is consistent with Q2's lumped bipolar-plate heat capacity and adds exactly
-25*q_k W to the stack energy balance.  A symmetric three-state mode is used
-for searching; the independent five-state mode validates the final policies.
+25*q_k W to the stack energy balance.  The optimization and final validation
+use five independent cell states.  The optional symmetric mode is retained
+only for diagnostics and is not used to constrain Problem 3's decisions.
 """
 
 from dataclasses import dataclass
@@ -16,11 +17,12 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "问题2"))
 from stack_model import (AREA_M2, AREA_CM2, ENDPLATE_CAP_J_K,
                          ENDPLATE_CONV_W_K, ETH, LATENT_FREEZE,
-                         MW, F, T_FREEZE, VSAFE_V, StackModel,
-                         policy_current)
+                         MW, F, T_FREEZE, VSAFE_V, StackModel)
 
 
-Q2_LINEAR_PARAMETERS = (0.17, 0.50, 5.0)
+Q3_RAMP_RATE_A_CM2_S = 0.005
+Q3_RAMP_DURATION_S = 60.0
+Q3_HOLD_CURRENT_A_CM2 = 0.30
 
 
 @dataclass
@@ -40,7 +42,9 @@ class AuxResult:
     voltage_v: np.ndarray
     ice_fraction: np.ndarray
     min_voltage_v: float
+    min_voltage_by_cell_v: np.ndarray
     max_ice_fraction: float
+    peak_ice_fraction_by_cell: np.ndarray
     max_pore_occupancy: float
     min_gas_mol_m3: float
     max_water_balance_kg_m2: float
@@ -60,34 +64,30 @@ class AuxResult:
         return np.array(self.powers_w_cm2) * AREA_CM2 * self.actual_heat_s
 
 
-def prescribed_current(t, mode, heat_s, postload="q2_linear"):
+def prescribed_current(t, mode, heat_s, postload="q3_ramp"):
     """Return the Q3 current density in A/cm2.
 
-    The statement explicitly excludes pure preheating from the common Q3
-    0-to-0.3 A/cm2 ramp.  Once all cells are above 0 C, pure preheating is
-    therefore closed with Q2's fastest feasible optimized loading policy.
+    Both strategies use the same prescribed Q3 loading law.  Cooperative
+    startup applies it from t=0.  Pure preheating keeps j=0 during [0, heat_s)
+    and applies the same law with local loading time tau=t-heat_s afterwards.
     """
+    if postload != "q3_ramp":
+        raise ValueError("Problem 3 uses only the prescribed 0-to-0.3 A/cm2 ramp")
     if mode == "cooperative":
-        return min(0.005 * max(t, 0.0), 0.3)
-    if t < heat_s - 1e-10:
-        return 0.0
-    if postload == "q2_linear":
-        return policy_current("linear", Q2_LINEAR_PARAMETERS, max(t - heat_s, 0.0))
-    if postload == "step":
-        return 0.3
-    if postload == "ramp":
-        return min(0.005 * max(t - heat_s, 0.0), 0.3)
-    raise ValueError(postload)
+        tau = max(t, 0.0)
+    else:
+        if t < heat_s - 1e-10:
+            return 0.0
+        tau = max(t - heat_s, 0.0)
+    return min(Q3_RAMP_RATE_A_CM2_S * tau, Q3_HOLD_CURRENT_A_CM2)
 
 
 def current_breakpoints(mode, heat_s, postload):
+    if postload != "q3_ramp":
+        raise ValueError("Problem 3 uses only the prescribed current ramp")
     if mode == "cooperative":
-        return (heat_s, 60.0)
-    if postload == "q2_linear":
-        return (heat_s, heat_s + Q2_LINEAR_PARAMETERS[2])
-    if postload == "ramp":
-        return (heat_s, heat_s + 60.0)
-    return (heat_s,)
+        return tuple(sorted(set((heat_s, Q3_RAMP_DURATION_S))))
+    return (heat_s, heat_s + Q3_RAMP_DURATION_S)
 
 
 class AuxStack(StackModel):
@@ -134,7 +134,7 @@ class AuxStack(StackModel):
 
     def simulate(self, mode, powers, heat_s, *, initial_c=-30.0,
                  ambient_c=-30.0, dt_max=0.5, time_cap=240.0,
-                 capture_interval=1.0, postload="q2_linear", charge_limit=None,
+                 capture_interval=1.0, postload="q3_ramp", charge_limit=None,
                  temp_margin=0.0, stop_on_success=True):
         if mode not in ("preheat", "cooperative"):
             raise ValueError(mode)
@@ -161,6 +161,8 @@ class AuxStack(StackModel):
         water_per_lambda = 2150.0 * MW * 12e-6
         t = charge = aux_energy = q_elec = q_latent = q_lost = 0.0
         min_v, min_gas = float("inf"), float("inf")
+        min_v_by_cell = np.full(5, np.inf)
+        peak_ice_by_cell = np.zeros(5)
         max_ice = max_occ = max_water_error = 0.0
         times, currents, charges, temperatures, plates, voltages, ice_series = ([] for _ in range(7))
         last_capture = -float("inf")
@@ -180,8 +182,10 @@ class AuxStack(StackModel):
             full_i = ii[[0, 1, 2, 1, 0]] if self.symmetric else ii
             if track_voltage:
                 min_v = min(min_v, float(np.min(vv)))
+                np.minimum(min_v_by_cell, full_v, out=min_v_by_cell)
             min_gas = min(min_gas, min(x[1] for x in stats))
             max_ice = max(max_ice, float(np.max(ii)))
+            np.maximum(peak_ice_by_cell, full_i, out=peak_ice_by_cell)
             max_occ = max(max_occ, max(x[3] for x in stats))
             if force or t - last_capture >= capture_interval - 1e-9:
                 times.append(t)
@@ -195,8 +199,8 @@ class AuxStack(StackModel):
             return full_t, full_v, full_i
 
         current = prescribed_current(0.0, mode, heat_s, postload)
-        means, vv, ii = observe(current, True, mode != "preheat" or heat_s == 0)
-        if mode == "cooperative" and np.min(means) > temp_margin and max_ice < 0.99 and min_v >= VSAFE_V:
+        means, vv, ii = observe(current, True, True)
+        if mode == "cooperative" and np.min(means) > temp_margin and np.max(ii) < 0.99 and min_v >= VSAFE_V:
             success, reason, startup = True, "startup", 0.0
         if mode == "preheat" and heat_s == 0 and np.min(means) > temp_margin and min_v >= VSAFE_V:
             success, reason, startup = True, "startup", 0.0
@@ -226,7 +230,7 @@ class AuxStack(StackModel):
                     reason = "voltage_below_0.30V"
                     break
             if mode == "preheat" and not success and t >= heat_s - 1e-10 and min_before_load is not None:
-                if float(np.min(means)) > temp_margin and max_ice < 0.99 and min_v >= VSAFE_V - 1e-9:
+                if float(np.min(means)) > temp_margin and np.max(ii) < 0.99 and min_v >= VSAFE_V - 1e-9:
                     success, reason, startup = True, "startup", t
                     if stop_on_success:
                         observe(jstart, True, True)
@@ -265,7 +269,7 @@ class AuxStack(StackModel):
             errors = produced - np.array([float(np.dot(w, m.dx)) for w in water]) - escaped - sorbed
             max_water_error = max(max_water_error, float(np.max(np.abs(errors))))
             current = prescribed_current(t, mode, heat_s, postload)
-            track = mode != "preheat" or t >= heat_s - 1e-10
+            track = True
             means, vv, ii = observe(current, t >= heat_s - 1e-10 and abs(t - heat_s) < 1e-8, track)
             if track and min_v < VSAFE_V - 1e-9:
                 reason = "voltage_below_0.30V"
@@ -277,7 +281,7 @@ class AuxStack(StackModel):
                     break
             eligible = mode == "cooperative" or t >= heat_s - 1e-10
             if (eligible and not success and np.min(means) > temp_margin
-                    and max_ice < 0.99 and min_v >= VSAFE_V - 1e-9):
+                    and np.max(ii) < 0.99 and min_v >= VSAFE_V - 1e-9):
                 success, reason, startup = True, "startup", t
             if charge_limit is not None and charge >= charge_limit - 1e-9 and not success:
                 reason = "charge_limit"
@@ -285,7 +289,7 @@ class AuxStack(StackModel):
 
         if not times or abs(times[-1] - t) > 1e-8:
             means, vv, ii = observe(prescribed_current(t, mode, heat_s, postload), True,
-                                    mode != "preheat" or t >= heat_s)
+                                    True)
         actual_heat_s = min(t, heat_s)
         storage = (AREA_M2 * float(np.sum(self.weights * np.sum(
             (temp - (initial_c + T_FREEZE)) * self.capacity_areal * m.dx, axis=1)))
@@ -296,6 +300,8 @@ class AuxStack(StackModel):
                          np.array(currents), np.array(charges),
                          np.array(temperatures), np.array(plates),
                          np.array(voltages), np.array(ice_series),
-                         min_v, max_ice, max_occ, min_gas, max_water_error,
+                         min_v, min_v_by_cell.copy(),
+                         max_ice, peak_ice_by_cell.copy(),
+                         max_occ, min_gas, max_water_error,
                          balance, q_elec, q_latent, aux_energy, q_lost, storage,
                          means.copy(), vv.copy(), ii.copy(), min_before_load)

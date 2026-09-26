@@ -1,0 +1,296 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "six_main_rows",
+      "passed": true,
+      "detail": "rows=6"
+    },
+    {
+      "name": "all_main_cases_success",
+      "passed": true,
+      "detail": [
+        "startup",
+        "startup",
+        "startup",
+        "startup",
+        "startup",
+        "startup"
+      ]
+    },
+    {
+      "name": "voltage_constraint",
+      "passed": true,
+      "detail": 0.3736586593714786
+    },
+    {
+      "name": "ice_constraint",
+      "passed": true,
+      "detail": 0.4173731955165713
+    },
+    {
+      "name": "finite_metrics",
+      "passed": true,
+      "detail": "all table metrics finite"
+    },
+    {
+      "name": "trajectory_bounds",
+      "passed": true,
+      "detail": [
+        {
+          "case": 1,
+          "strategy": "constant",
+          "rows": 1090,
+          "power_min": 0.0,
+          "power_max": 0.49468,
+          "sampled_voltage_min": 0.39866823847511096,
+          "sampled_ice_max": 0.4173458222453916,
+          "modes": [
+            "hold",
+            "off"
+          ],
+          "passed": true
+        },
+        {
+          "case": 1,
+          "strategy": "dynamic",
+          "rows": 1090,
+          "power_min": 0.0,
+          "power_max": 1.0,
+          "sampled_voltage_min": 0.3737299010145438,
+          "sampled_ice_max": 0.41737315931200625,
+          "modes": [
+            "boost",
+            "off",
+            "reduce"
+          ],
+          "passed": true
+        },
+        {
+          "case": 2,
+          "strategy": "constant",
+          "rows": 339,
+          "power_min": 0.0,
+          "power_max": 0.49468,
+          "sampled_voltage_min": 0.6633320123466518,
+          "sampled_ice_max": 0.0,
+          "modes": [
+            "hold",
+            "off"
+          ],
+          "passed": true
+        },
+        {
+          "case": 2,
+          "strategy": "dynamic",
+          "rows": 371,
+          "power_min": 0.0,
+          "power_max": 0.0,
+          "sampled_voltage_min": 0.6608995041437814,
+          "sampled_ice_max": 0.0,
+          "modes": [
+            "off"
+          ],
+          "passed": true
+        },
+        {
+          "case": 3,
+          "strategy": "constant",
+          "rows": 887,
+          "power_min": 0.0,
+          "power_max": 0.49468,
+          "sampled_voltage_min": 0.6278335889687354,
+          "sampled_ice_max": 0.13707755894783819,
+          "modes": [
+            "hold",
+            "off"
+          ],
+          "passed": true
+        },
+        {
+          "case": 3,
+          "strategy": "dynamic",
+          "rows": 909,
+          "power_min": 0.0,
+          "power_max": 0.0,
+          "sampled_voltage_min": 0.625329389291434,
+          "sampled_ice_max": 0.15562850208620146,
+          "modes": [
+            "off"
+          ],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "name": "precooling_initial_25C",
+      "passed": true,
+      "detail": {
+        "left_plate": "25.0",
+        "cell_1": "25.0",
+        "cell_2": "25.0",
+        "cell_3": "25.0",
+        "cell_4": "25.0",
+        "cell_5": "25.0",
+        "right_plate": "25.0"
+      }
+    },
+    {
+      "name": "precooling_symmetry",
+      "passed": true,
+      "detail": "max_abs_error=1.5631940186722204e-13"
+    },
+    {
+      "name": "precooling_approaches_ambient",
+      "passed": true,
+      "detail": {
+        "left_plate": "-29.299721632666145",
+        "cell_1": "-29.292546492310763",
+        "cell_2": "-29.287083437992823",
+        "cell_3": "-29.285259316271663",
+        "cell_4": "-29.287083437992823",
+        "cell_5": "-29.292546492310763",
+        "right_plate": "-29.299721632666145"
+      }
+    },
+    {
+      "name": "cooling_scan_range",
+      "passed": true,
+      "detail": [
+        10.0,
+        100.0,
+        10
+      ]
+    },
+    {
+      "name": "cooling_scan_grid",
+      "passed": true,
+      "detail": [
+        10.0,
+        20.0,
+        30.0,
+        40.0,
+        50.0,
+        60.0,
+        70.0,
+        80.0,
+        90.0,
+        100.0
+      ]
+    },
+    {
+      "name": "cooling_scan_all_success",
+      "passed": true,
+      "detail": [
+        "startup",
+        "startup",
+        "startup",
+        "startup",
+        "startup",
+        "startup",
+        "startup",
+        "startup",
+        "startup",
+        "startup"
+      ]
+    },
+    {
+      "name": "cooling_scan_voltage_constraint",
+      "passed": true,
+      "detail": 0.5421288244759783
+    },
+    {
+      "name": "cooling_temperature_monotone",
+      "passed": true,
+      "detail": [
+        5.774729780026547,
+        -29.292546492310763
+      ]
+    }
+  ],
+  "trajectory_checks": [
+    {
+      "case": 1,
+      "strategy": "constant",
+      "rows": 1090,
+      "power_min": 0.0,
+      "power_max": 0.49468,
+      "sampled_voltage_min": 0.39866823847511096,
+      "sampled_ice_max": 0.4173458222453916,
+      "modes": [
+        "hold",
+        "off"
+      ],
+      "passed": true
+    },
+    {
+      "case": 1,
+      "strategy": "dynamic",
+      "rows": 1090,
+      "power_min": 0.0,
+      "power_max": 1.0,
+      "sampled_voltage_min": 0.3737299010145438,
+      "sampled_ice_max": 0.41737315931200625,
+      "modes": [
+        "boost",
+        "off",
+        "reduce"
+      ],
+      "passed": true
+    },
+    {
+      "case": 2,
+      "strategy": "constant",
+      "rows": 339,
+      "power_min": 0.0,
+      "power_max": 0.49468,
+      "sampled_voltage_min": 0.6633320123466518,
+      "sampled_ice_max": 0.0,
+      "modes": [
+        "hold",
+        "off"
+      ],
+      "passed": true
+    },
+    {
+      "case": 2,
+      "strategy": "dynamic",
+      "rows": 371,
+      "power_min": 0.0,
+      "power_max": 0.0,
+      "sampled_voltage_min": 0.6608995041437814,
+      "sampled_ice_max": 0.0,
+      "modes": [
+        "off"
+      ],
+      "passed": true
+    },
+    {
+      "case": 3,
+      "strategy": "constant",
+      "rows": 887,
+      "power_min": 0.0,
+      "power_max": 0.49468,
+      "sampled_voltage_min": 0.6278335889687354,
+      "sampled_ice_max": 0.13707755894783819,
+      "modes": [
+        "hold",
+        "off"
+      ],
+      "passed": true
+    },
+    {
+      "case": 3,
+      "strategy": "dynamic",
+      "rows": 909,
+      "power_min": 0.0,
+      "power_max": 0.0,
+      "sampled_voltage_min": 0.625329389291434,
+      "sampled_ice_max": 0.15562850208620146,
+      "modes": [
+        "off"
+      ],
+      "passed": true
+    }
+  ]
+}

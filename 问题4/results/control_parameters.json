@@ -1,0 +1,213 @@
+{
+  "status": "completed",
+  "controller": "energy-targeted event feedback",
+  "feedback_signals": [
+    "T_k",
+    "V_k",
+    "dT_k/dt",
+    "dV_k/dt"
+  ],
+  "modes": [
+    "boost",
+    "hold",
+    "reduce",
+    "off"
+  ],
+  "fixed_settings": {
+    "control_interval_s": 0.25,
+    "voltage_prediction_threshold_v": 0.3008,
+    "voltage_hold_threshold_v": 0.31,
+    "prediction_horizon_s": 1.5,
+    "voltage_drop_risk_v_s": -0.006,
+    "temperature_rate_hold_c_s": 0.015,
+    "hold_power_w_cm2": 0.2,
+    "reduce_power_w_cm2": 0.1
+  },
+  "q3_constant_baseline": {
+    "powers_w_cm2": [
+      0.49466,
+      0.32,
+      0.25,
+      0.32,
+      0.49468
+    ],
+    "duration_s": 4.075,
+    "source": "问题3/results/cooperative_search.json"
+  },
+  "selected_by_case": {
+    "1": {
+      "cooling_minutes": null,
+      "initial_cell_temperature_c": [
+        -30.0,
+        -30.0,
+        -30.0,
+        -30.0,
+        -30.0
+      ],
+      "initial_plate_temperature_c": [
+        -30.0,
+        -30.0
+      ],
+      "coarse_energy_targets_3_j": [
+        45.355055625000006,
+        29.340000000000003,
+        22.921875
+      ],
+      "validated_energy_targets_3_j": [
+        45.355055625000006,
+        29.340000000000003,
+        22.921875
+      ],
+      "validated_energy_targets_5_j": [
+        45.355055625000006,
+        29.340000000000003,
+        22.921875,
+        29.340000000000003,
+        45.355055625000006
+      ],
+      "validation_scale": 1.0
+    },
+    "2": {
+      "cooling_minutes": 20.0,
+      "initial_cell_temperature_c": [
+        -6.865690928294992,
+        -6.687044578120641,
+        -6.627394303971101,
+        -6.687044578120641,
+        -6.865690928294995
+      ],
+      "initial_plate_temperature_c": [
+        -7.100323894009609,
+        -7.100323894009598
+      ],
+      "coarse_energy_targets_3_j": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validated_energy_targets_3_j": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validated_energy_targets_5_j": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validation_scale": 1.0
+    },
+    "3": {
+      "cooling_minutes": 40.0,
+      "initial_cell_temperature_c": [
+        -20.32575957924498,
+        -20.25105375005768,
+        -20.22610936587495,
+        -20.25105375005768,
+        -20.32575957924498
+      ],
+      "initial_plate_temperature_c": [
+        -20.423877734143076,
+        -20.423877734143073
+      ],
+      "coarse_energy_targets_3_j": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validated_energy_targets_3_j": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validated_energy_targets_5_j": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "validation_scale": 1.0
+    }
+  },
+  "search_audit": [
+    {
+      "case": 1,
+      "coarse_evaluations": 3,
+      "coarse_success": true,
+      "coarse_energy_j": 190.62499999999994,
+      "validated_success": true,
+      "validated_energy_j": 190.62499999999994,
+      "candidate_grid": [
+        {
+          "scale": 0.8,
+          "targets_3_j": [
+            40.315605000000005,
+            26.080000000000002,
+            20.375
+          ],
+          "success": false,
+          "energy_j": 194.37499999999744,
+          "startup_s": null,
+          "min_voltage_v": 0.2844707826909953,
+          "max_ice_fraction": 0.41419587350422166,
+          "source": "executed_84_cell_grid_dt0.05_s"
+        },
+        {
+          "scale": 0.85,
+          "targets_3_j": [
+            42.835330312500005,
+            27.71,
+            21.6484375
+          ],
+          "success": false,
+          "energy_j": 194.37499999999744,
+          "startup_s": null,
+          "min_voltage_v": 0.2844707826909953,
+          "max_ice_fraction": 0.41419587350422166,
+          "source": "executed_84_cell_grid_dt0.05_s"
+        },
+        {
+          "scale": 0.9,
+          "targets_3_j": [
+            45.355055625000006,
+            29.340000000000003,
+            22.921875
+          ],
+          "success": true,
+          "energy_j": 190.62499999999994,
+          "startup_s": 272.04999999999455,
+          "min_voltage_v": 0.3736586593714786,
+          "max_ice_fraction": 0.4173731955165713,
+          "source": "executed_84_cell_grid_dt0.05_s"
+        }
+      ]
+    },
+    {
+      "case": 2,
+      "coarse_evaluations": 1,
+      "coarse_success": true,
+      "coarse_energy_j": 0.0,
+      "validated_success": true,
+      "validated_energy_j": 0.0,
+      "candidate_grid": null
+    },
+    {
+      "case": 3,
+      "coarse_evaluations": 1,
+      "coarse_success": true,
+      "coarse_energy_j": 0.0,
+      "validated_success": true,
+      "validated_energy_j": 0.0,
+      "candidate_grid": null
+    }
+  ],
+  "validation": {
+    "mesh_factor": 3,
+    "dt_max_s": 0.05,
+    "voltage_margin_v": 0.3005,
+    "ice_limit": 0.99
+  }
+}

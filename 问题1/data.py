@@ -8,7 +8,7 @@ from openpyxl import load_workbook
 
 
 ROOT = Path(__file__).resolve().parents[1]
-EXPERIMENT_FILE = ROOT / "problem_files/附件2.xlsx"
+EXPERIMENT_FILE = ROOT / "附件" / "附件2.xlsx"
 
 
 @dataclass(frozen=True)

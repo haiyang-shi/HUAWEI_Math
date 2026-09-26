@@ -1,0 +1,318 @@
+{
+  "status": "completed_model_prediction",
+  "objective": "auxiliary energy first; time, temperature spread, voltage and ice are secondary safety/performance metrics",
+  "rows": [
+    {
+      "case": 1,
+      "cooling_minutes": null,
+      "strategy": "constant",
+      "success": true,
+      "reason": "startup",
+      "startup_s": 272.3249999999946,
+      "auxiliary_energy_j": 191.45776250000011,
+      "energy_each_j": [
+        50.39348750000002,
+        32.6,
+        25.46875000000004,
+        32.6,
+        50.39552500000006
+      ],
+      "energy_targets_j": null,
+      "max_temperature_spread_c": 4.332917059217152,
+      "min_voltage_v": 0.39866473394757906,
+      "min_voltage_by_cell_v": [
+        0.39866473394757906,
+        0.6037576940850214,
+        0.6044129675614868,
+        0.603757716516402,
+        0.39869474193490956
+      ],
+      "max_ice_fraction": 0.41734584570573385,
+      "peak_ice_fraction_by_cell": [
+        0.41734584570573385,
+        0.30730935000874376,
+        0.2749639346090407,
+        0.30730927832934474,
+        0.41734580151659867
+      ],
+      "max_pore_occupancy": 0.9979103628178064,
+      "initial_cell_temperature_c": [
+        -30.0,
+        -30.0,
+        -30.0,
+        -30.0,
+        -30.0
+      ],
+      "initial_plate_temperature_c": [
+        -30.0,
+        -30.0
+      ],
+      "max_water_balance_kg_m2": 4.785234708482022e-15,
+      "energy_balance_j": -9.925761332851835e-07,
+      "power_strategy": "q=[0.49466, 0.32, 0.25, 0.32, 0.49468] W/cm2 for 4.07500 s"
+    },
+    {
+      "case": 1,
+      "cooling_minutes": null,
+      "strategy": "dynamic",
+      "success": true,
+      "reason": "startup",
+      "startup_s": 272.04999999999455,
+      "auxiliary_energy_j": 190.62499999999994,
+      "energy_each_j": [
+        50.62499999999997,
+        31.874999999999993,
+        25.624999999999996,
+        31.874999999999993,
+        50.62499999999997
+      ],
+      "energy_targets_j": [
+        45.355055625000006,
+        29.340000000000003,
+        22.921875,
+        29.340000000000003,
+        45.355055625000006
+      ],
+      "max_temperature_spread_c": 4.333406359240712,
+      "min_voltage_v": 0.3736586593714786,
+      "min_voltage_by_cell_v": [
+        0.3736586593714786,
+        0.6035947332881565,
+        0.6042189521281841,
+        0.6035947332881391,
+        0.37365865946565613
+      ],
+      "max_ice_fraction": 0.4173731955165713,
+      "peak_ice_fraction_by_cell": [
+        0.4173731955165713,
+        0.3074758499267026,
+        0.2751507123323191,
+        0.3074758499264582,
+        0.4173731955164608
+      ],
+      "max_pore_occupancy": 0.9979778753836707,
+      "initial_cell_temperature_c": [
+        -30.0,
+        -30.0,
+        -30.0,
+        -30.0,
+        -30.0
+      ],
+      "initial_plate_temperature_c": [
+        -30.0,
+        -30.0
+      ],
+      "max_water_balance_kg_m2": 4.682018661661402e-15,
+      "energy_balance_j": -9.82272467808798e-07,
+      "power_strategy": "independent boost/hold/reduce/off feedback; initial energy targets=[45.35506, 29.34, 22.92188, 29.34, 45.35506] J"
+    },
+    {
+      "case": 2,
+      "cooling_minutes": 20.0,
+      "strategy": "constant",
+      "success": true,
+      "reason": "startup",
+      "startup_s": 84.57499999999702,
+      "auxiliary_energy_j": 191.45776250000011,
+      "energy_each_j": [
+        50.39348750000002,
+        32.6,
+        25.46875000000004,
+        32.6,
+        50.39552500000006
+      ],
+      "energy_targets_j": null,
+      "max_temperature_spread_c": 3.6222062814705964,
+      "min_voltage_v": 0.6633293607302131,
+      "min_voltage_by_cell_v": [
+        0.6633293607302131,
+        0.6658254534193472,
+        0.666584565382185,
+        0.6658254746075378,
+        0.663329391751582
+      ],
+      "max_ice_fraction": 0.0,
+      "peak_ice_fraction_by_cell": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max_pore_occupancy": 0.0,
+      "initial_cell_temperature_c": [
+        -6.865690928294992,
+        -6.687044578120641,
+        -6.627394303971101,
+        -6.687044578120641,
+        -6.865690928294995
+      ],
+      "initial_plate_temperature_c": [
+        -7.100323894009609,
+        -7.100323894009598
+      ],
+      "max_water_balance_kg_m2": 1.6306400674181987e-16,
+      "energy_balance_j": -3.291581833764212e-07,
+      "power_strategy": "q=[0.49466, 0.32, 0.25, 0.32, 0.49468] W/cm2 for 4.07500 s"
+    },
+    {
+      "case": 2,
+      "cooling_minutes": 20.0,
+      "strategy": "dynamic",
+      "success": true,
+      "reason": "startup",
+      "startup_s": 92.44999999999656,
+      "auxiliary_energy_j": 0.0,
+      "energy_each_j": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "energy_targets_j": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max_temperature_spread_c": 3.6893026266504307,
+      "min_voltage_v": 0.6608990510504053,
+      "min_voltage_by_cell_v": [
+        0.6608990510504053,
+        0.6622578178676253,
+        0.6625968720579847,
+        0.6622578178676287,
+        0.6608990510504056
+      ],
+      "max_ice_fraction": 0.0,
+      "peak_ice_fraction_by_cell": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max_pore_occupancy": 0.0,
+      "initial_cell_temperature_c": [
+        -6.865690928294992,
+        -6.687044578120641,
+        -6.627394303971101,
+        -6.687044578120641,
+        -6.865690928294995
+      ],
+      "initial_plate_temperature_c": [
+        -7.100323894009609,
+        -7.100323894009598
+      ],
+      "max_water_balance_kg_m2": 1.9081958235744878e-16,
+      "energy_balance_j": -3.60292460754863e-07,
+      "power_strategy": "independent boost/hold/reduce/off feedback; initial energy targets=[0.0, 0.0, 0.0, 0.0, 0.0] J"
+    },
+    {
+      "case": 3,
+      "cooling_minutes": 40.0,
+      "strategy": "constant",
+      "success": true,
+      "reason": "startup",
+      "startup_s": 221.5249999999946,
+      "auxiliary_energy_j": 191.45776250000011,
+      "energy_each_j": [
+        50.39348750000002,
+        32.6,
+        25.46875000000004,
+        32.6,
+        50.39552500000006
+      ],
+      "energy_targets_j": null,
+      "max_temperature_spread_c": 3.863201449109283,
+      "min_voltage_v": 0.6278306372449497,
+      "min_voltage_by_cell_v": [
+        0.6278306372449497,
+        0.6301477891960166,
+        0.630844425442388,
+        0.6301478109890731,
+        0.6278306691702203
+      ],
+      "max_ice_fraction": 0.13707755894783819,
+      "peak_ice_fraction_by_cell": [
+        0.13707755894783819,
+        0.06993799245970414,
+        0.05279230286243671,
+        0.06993793401208459,
+        0.13707742304711484
+      ],
+      "max_pore_occupancy": 0.33333244424742464,
+      "initial_cell_temperature_c": [
+        -20.32575957924498,
+        -20.25105375005768,
+        -20.22610936587495,
+        -20.25105375005768,
+        -20.32575957924498
+      ],
+      "initial_plate_temperature_c": [
+        -20.423877734143076,
+        -20.423877734143073
+      ],
+      "max_water_balance_kg_m2": 2.4190718872496575e-15,
+      "energy_balance_j": -8.209999577957205e-07,
+      "power_strategy": "q=[0.49466, 0.32, 0.25, 0.32, 0.49468] W/cm2 for 4.07500 s"
+    },
+    {
+      "case": 3,
+      "cooling_minutes": 40.0,
+      "strategy": "dynamic",
+      "success": true,
+      "reason": "startup",
+      "startup_s": 226.84999999999457,
+      "auxiliary_energy_j": 0.0,
+      "energy_each_j": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "energy_targets_j": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "max_temperature_spread_c": 3.884858100127019,
+      "min_voltage_v": 0.6253287888754616,
+      "min_voltage_by_cell_v": [
+        0.6253287888754616,
+        0.6264757601881128,
+        0.626740191362108,
+        0.6264757601881549,
+        0.6253287888754913
+      ],
+      "max_ice_fraction": 0.15562850208620146,
+      "peak_ice_fraction_by_cell": [
+        0.15562850208620146,
+        0.08478544215272132,
+        0.06647535538587325,
+        0.08478544215262909,
+        0.15562850208563747
+      ],
+      "max_pore_occupancy": 0.3773032872837675,
+      "initial_cell_temperature_c": [
+        -20.32575957924498,
+        -20.25105375005768,
+        -20.22610936587495,
+        -20.25105375005768,
+        -20.32575957924498
+      ],
+      "initial_plate_temperature_c": [
+        -20.423877734143076,
+        -20.423877734143073
+      ],
+      "max_water_balance_kg_m2": 2.8709673527416157e-15,
+      "energy_balance_j": -8.051101758610457e-07,
+      "power_strategy": "independent boost/hold/reduce/off feedback; initial energy targets=[0.0, 0.0, 0.0, 0.0, 0.0] J"
+    }
+  ]
+}

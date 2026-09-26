@@ -1,129 +1,71 @@
 {
-  "interpretation": "Pure preheating uses zero current until all five cells exceed 0 C, then starts Q2's optimized linear loading policy.",
-  "postload_policy": {
-    "family": "linear",
-    "parameters": [
-      0.17,
-      0.5,
-      5.0
-    ],
-    "source": "Problem 2 fastest feasible candidate"
-  },
-  "runs": [
-    {
-      "start": [
-        1,
-        1,
-        1,
-        50
-      ],
-      "parameters": [
-        0.9999999988175545,
-        0.9999999986808118,
-        0.9999999994161645,
-        46.44190034340698
-      ],
-      "energy_j": 5805.237536438981,
-      "min_temperature_c": 0.010000091595301797,
-      "postload_policy": "Q2 optimized linear 0.17 to 0.50 A/cm2 in 5 s",
-      "loaded_current_at_switch_a_cm2": 0.17,
-      "min_loaded_voltage_v": 0.40009919449689296,
-      "feasible_surrogate": true,
-      "solver_success": true,
-      "message": "Optimization terminated successfully",
-      "evaluations": 116
-    },
-    {
-      "start": [
-        1,
-        0.8,
-        0.8,
-        65
-      ],
-      "parameters": [
-        1.0,
-        1.0,
-        1.0,
-        46.441898660385675
-      ],
-      "energy_j": 5805.237332548209,
-      "min_temperature_c": 0.009999324619258232,
-      "postload_policy": "Q2 optimized linear 0.17 to 0.50 A/cm2 in 5 s",
-      "loaded_current_at_switch_a_cm2": 0.17,
-      "min_loaded_voltage_v": 0.4000991924180631,
-      "feasible_surrogate": true,
-      "solver_success": false,
-      "message": "Positive directional derivative for linesearch",
-      "evaluations": 58
-    },
-    {
-      "start": [
-        0.8,
-        0.8,
-        0.8,
-        80
-      ],
-      "parameters": [
-        0.999999995440588,
-        0.9999999954405603,
-        0.99999999772024,
-        46.441900342558235
-      ],
-      "energy_j": 5805.23751899803,
-      "min_temperature_c": 0.010000000327408998,
-      "postload_policy": "Q2 optimized linear 0.17 to 0.50 A/cm2 in 5 s",
-      "loaded_current_at_switch_a_cm2": 0.17,
-      "min_loaded_voltage_v": 0.40009919424951834,
-      "feasible_surrogate": true,
-      "solver_success": true,
-      "message": "Optimization terminated successfully",
-      "evaluations": 72
-    },
-    {
-      "start": [
-        1,
-        0.6,
-        0.4,
-        100
-      ],
-      "parameters": [
-        1.0,
-        1.0,
-        1.0,
-        46.44190007265273
-      ],
-      "energy_j": 5805.23750908159,
-      "min_temperature_c": 0.009999996616244289,
-      "postload_policy": "Q2 optimized linear 0.17 to 0.50 A/cm2 in 5 s",
-      "loaded_current_at_switch_a_cm2": 0.17,
-      "min_loaded_voltage_v": 0.40009919423945967,
-      "feasible_surrogate": true,
-      "solver_success": true,
-      "message": "Optimization terminated successfully",
-      "evaluations": 261
-    }
+  "status": "completed",
+  "decision_variables": [
+    "q1",
+    "q2",
+    "q3",
+    "q4",
+    "q5",
+    "heat_s"
   ],
+  "objective": "minimize 25*heat_s*sum(qk)",
+  "constraints": {
+    "power_bounds_w_cm2": [
+      0.0,
+      1.0
+    ],
+    "temperature_c": "LP design target >= 0.05 C; independent success check > 0.01 C",
+    "ice_fraction": "< 0.99",
+    "voltage_v": ">= 0.3005 V numerical margin"
+  },
+  "current_law": "j=0 during preheat; then j(tau)=min(0.005*tau,0.3) A/cm2",
+  "method": "duration grid + bounded scalar refinement; five-power LP at each duration",
+  "grid_step_s": 0.25,
+  "duration_tolerance_s": 0.001,
+  "preheat_design_target_c": 0.05,
   "best": {
-    "start": [
-      1,
-      0.6,
-      0.4,
-      100
+    "powers_w_cm2": [
+      1.0,
+      0.9999999999999409,
+      0.9999702356070799,
+      1.0,
+      1.0
     ],
-    "parameters": [
-      1.0,
-      1.0,
-      1.0,
-      46.44190007265273
+    "heat_s": 46.526311234992846,
+    "energy_each_j": [
+      1163.1577808748211,
+      1163.1577808747525,
+      1163.1231601896031,
+      1163.1577808748211,
+      1163.1577808748211
     ],
-    "energy_j": 5805.23750908159,
-    "min_temperature_c": 0.009999996616244289,
-    "postload_policy": "Q2 optimized linear 0.17 to 0.50 A/cm2 in 5 s",
-    "loaded_current_at_switch_a_cm2": 0.17,
-    "min_loaded_voltage_v": 0.40009919423945967,
-    "feasible_surrogate": true,
-    "solver_success": true,
-    "message": "Optimization terminated successfully",
-    "evaluations": 261
+    "energy_j": 5815.75428368882,
+    "temperature_c": [
+      0.05000000000000071,
+      11.53222576767633,
+      15.306406376018145,
+      11.532225767676543,
+      0.05000000000000426
+    ],
+    "voltage_at_loading_start_v": [
+      1.241022318220975,
+      1.2308763855757565,
+      1.2275414413743524,
+      1.2308763855757563,
+      1.241022318220975
+    ],
+    "min_temperature_c": 0.05000000000000071,
+    "min_voltage_v": 1.2275414413743524,
+    "full_model_validation": {
+      "success": true,
+      "reason": "startup",
+      "startup_s": 46.526311234992846,
+      "energy_j": 5815.754283688995,
+      "min_voltage_v": 1.227548076022523,
+      "max_ice_fraction": 0.0,
+      "min_final_temperature_c": 0.04776110592615623,
+      "mesh_cells_per_cell": 84,
+      "dt_max_s": 0.05
+    }
   }
 }

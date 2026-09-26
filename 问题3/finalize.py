@@ -2,24 +2,28 @@
 
 import argparse
 import csv
-import hashlib
 import json
 from pathlib import Path
-import sys
 
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
 import numpy as np
 
 from aux_model import AuxStack
 
-ROOT = Path(__file__).resolve().parents[1]
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "results"
 
-PREHEAT = ([1.0] * 5, 46.5)
-COOPERATIVE = ([.5, .32, .25, .32, .5], 4.1)
+TEMP_MARGIN_C = 0.01
+VOLTAGE_MARGIN_V = 0.3005
+ICE_LIMIT = 0.99
+
+
+def load_selected_policies():
+    pre_search = json.loads((OUT / "preheat_search.json").read_text(encoding="utf-8"))
+    co_search = json.loads((OUT / "cooperative_search.json").read_text(encoding="utf-8"))
+    pre = pre_search["best"]
+    co = co_search["best"]
+    return ((pre["powers_w_cm2"], float(pre["heat_s"])),
+            (co["powers_w_cm2"], float(co["heat_s"])))
 
 
 def as_record(r):
@@ -33,7 +37,11 @@ def as_record(r):
         "success": r.success, "reason": r.reason, "startup_s": r.startup_s,
         "charge_c_cm2": float(r.charge_c_cm2[-1]),
         "minimum_voltage_v": r.min_voltage_v,
+        "minimum_voltage_by_cell_v": [float(x) for x in r.min_voltage_by_cell_v],
         "maximum_local_ice_fraction": r.max_ice_fraction,
+        "peak_local_ice_fraction_by_cell": [float(x) for x in r.peak_ice_fraction_by_cell],
+        "maximum_end_cell_ice_fraction": float(max(
+            r.peak_ice_fraction_by_cell[0], r.peak_ice_fraction_by_cell[4])),
         "maximum_pore_occupancy": r.max_pore_occupancy,
         "minimum_gas_mol_m3": r.min_gas_mol_m3,
         "coldest_cell": int(np.argmin(r.final_temperature_c) + 1),
@@ -52,134 +60,68 @@ def as_record(r):
     }
 
 
-def save_trajectory(path, r):
-    with path.open("w", newline="", encoding="utf-8-sig") as f:
-        w = csv.writer(f)
-        w.writerow(["time_s", "current_Acm2", "charge_Ccm2",
-                    *[f"T{k}_C" for k in range(1, 6)],
-                    "Tplate_left_C", "Tplate_right_C",
-                    *[f"V{k}_V" for k in range(1, 6)],
-                    *[f"ice{k}_fraction" for k in range(1, 6)]])
-        for i in range(len(r.time_s)):
-            w.writerow([r.time_s[i], r.current_a_cm2[i], r.charge_c_cm2[i],
-                        *r.temperature_c[i], *r.plate_temperature_c[i],
-                        *r.voltage_v[i], *r.ice_fraction[i]])
-
-
-def plot_results(pre_follow, co):
-    fig, axes = plt.subplots(2, 3, figsize=(13, 7), constrained_layout=True)
-    for row, r in enumerate((pre_follow, co)):
-        t = r.time_s
-        for k in range(5):
-            axes[row, 0].plot(t, r.temperature_c[:, k], lw=1.2, label=f"cell {k+1}")
-            axes[row, 1].plot(t, r.voltage_v[:, k], lw=1.2)
-            axes[row, 2].plot(t, r.ice_fraction[:, k], lw=1.2)
-        axes[row, 0].axhline(0, color="black", ls="--", lw=.8)
-        axes[row, 1].axhline(.30, color="black", ls="--", lw=.8)
-        for ax in axes[row]:
-            ax.axvline(r.actual_heat_s, color="#d95f02", ls=":", lw=1)
-            ax.set_xlabel("Time (s)")
-            ax.grid(alpha=.2)
-    axes[0, 0].set_ylabel("Preheat: temperature (C)")
-    axes[1, 0].set_ylabel("Cooperative: temperature (C)")
-    axes[0, 1].set_ylabel("Cell voltage (V)")
-    axes[1, 1].set_ylabel("Cell voltage (V)")
-    axes[0, 2].set_ylabel("Local ice fraction")
-    axes[1, 2].set_ylabel("Local ice fraction")
-    axes[0, 0].legend(loc="best", fontsize=7)
-    fig.savefig(OUT / "strategy_trajectories.png", dpi=170)
-    plt.close(fig)
-
-    fig, ax = plt.subplots(figsize=(7, 4), constrained_layout=True)
-    x = np.arange(1, 6)
-    ax.bar(x - .18, pre_follow.energy_each_j, width=.36, label="pure preheat")
-    ax.bar(x + .18, co.energy_each_j, width=.36, label="cooperative")
-    ax.set(xlabel="Cell index", ylabel="Auxiliary heater energy (J)", xticks=x)
-    ax.legend()
-    ax.grid(axis="y", alpha=.2)
-    fig.savefig(OUT / "energy_distribution.png", dpi=170)
-    plt.close(fig)
-
-
-def file_info(path):
-    return {"path": str(path.relative_to(ROOT)).replace("\\", "/"),
-            "bytes": path.stat().st_size,
-            "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+def satisfies_q2_with_margin(r):
+    return (r.success
+            and float(np.min(r.final_temperature_c)) >= TEMP_MARGIN_C - 1e-8
+            and r.max_ice_fraction < ICE_LIMIT
+            and r.min_voltage_v >= VOLTAGE_MARGIN_V)
 
 
 def main():
     OUT.mkdir(exist_ok=True)
+    preheat, cooperative = load_selected_policies()
     model = AuxStack(symmetric=False, mesh_factor=3)
-    pre = model.simulate("preheat", *PREHEAT, dt_max=.05, time_cap=46.6,
-                         postload="q2_linear", capture_interval=.1)
+    pre = model.simulate("preheat", *preheat, dt_max=.05,
+                         time_cap=preheat[1] + .1,
+                         postload="q3_ramp", capture_interval=.1,
+                         temp_margin=TEMP_MARGIN_C)
     print("preheat", pre.success, pre.reason, pre.startup_s, pre.heat_aux_j,
           pre.min_voltage_v, flush=True)
-    pre_follow = model.simulate(
-        "preheat", *PREHEAT, dt_max=.05, time_cap=51.5,
-        postload="q2_linear", capture_interval=.1, stop_on_success=False)
-    save_trajectory(OUT / "preheat_trajectory.csv", pre_follow)
-    co = model.simulate("cooperative", *COOPERATIVE, dt_max=.05, time_cap=310,
-                        capture_interval=.5)
+    co = model.simulate("cooperative", *cooperative, dt_max=.05, time_cap=310,
+                        capture_interval=.5, temp_margin=TEMP_MARGIN_C)
     print("cooperative", co.success, co.reason, co.startup_s, co.heat_aux_j,
           co.min_voltage_v, flush=True)
-    save_trajectory(OUT / "cooperative_trajectory.csv", co)
-    if not pre.success or not co.success:
-        raise RuntimeError("A selected primary strategy failed the final simulation")
+    if not satisfies_q2_with_margin(pre) or not satisfies_q2_with_margin(co):
+        raise RuntimeError(
+            "A selected primary strategy failed the final Q2 constraints with margins")
     table = {"model_status": "model_prediction",
              "mesh_cells_per_cell": model.cell.n,
              "dt_max_s": .05,
              "initial_and_ambient_c": -30,
-             "preheat_postload": (
-                 "Q2 optimized linear policy: 0.17 to 0.50 A/cm2 in 5 s; "
-                 "voltage checked at the loaded right limit"
+             "current_law": (
+                 "Both strategies use j(tau)=min(0.005*tau,0.3) A/cm2; "
+                 "tau=t for cooperative startup and tau=t-t_h after pure preheating"
              ),
              "charge_limit_primary": None,
              "preheat": as_record(pre),
-             "preheat_postload_5s_check": as_record(pre_follow),
              "cooperative": as_record(co)}
+    table["comparison"] = {
+        "cooperative_aux_energy_saving_percent": float(
+            100.0 * (pre.heat_aux_j - co.heat_aux_j) / pre.heat_aux_j),
+        "startup_time_difference_s": float(co.startup_s - pre.startup_s),
+        "pure_preheat_end_cell_peak_ice_fraction": float(max(
+            pre.peak_ice_fraction_by_cell[0], pre.peak_ice_fraction_by_cell[4])),
+        "cooperative_end_cell_peak_ice_fraction": float(max(
+            co.peak_ice_fraction_by_cell[0], co.peak_ice_fraction_by_cell[4])),
+        "end_cell_peak_ice_by_strategy": {
+            "pure_preheat": [float(pre.peak_ice_fraction_by_cell[0]),
+                             float(pre.peak_ice_fraction_by_cell[4])],
+            "cooperative": [float(co.peak_ice_fraction_by_cell[0]),
+                            float(co.peak_ice_fraction_by_cell[4])],
+        },
+    }
     (OUT / "table4.json").write_text(json.dumps(table, ensure_ascii=False, indent=2), encoding="utf-8")
     with (OUT / "table4.csv").open("w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f)
         w.writerow(["strategy", "q1", "q2", "q3", "q4", "q5",
                     "heater_duration_s", "E1_J", "E2_J", "E3_J", "E4_J", "E5_J",
-                    "total_aux_J", "startup_s", "max_ice_fraction", "min_voltage_V", "success"])
+                    "total_aux_J", "startup_s", "max_ice_fraction",
+                    "max_end_cell_ice_fraction", "min_voltage_V", "success"])
         for name, r in (("pure_preheat", pre), ("cooperative", co)):
             w.writerow([name, *r.powers_w_cm2, r.actual_heat_s,
                         *r.energy_each_j, r.heat_aux_j, r.startup_s,
-                        r.max_ice_fraction, r.min_voltage_v, r.success])
-    plot_results(pre_follow, co)
-
-    # The five-second continuation is an engineering check, not an additional
-    # condition inserted into the statement's first-passage startup time.
-    alternate = {
-        "preheat_Q2_linear_5s_followup": {
-            "postload_policy": "0.17 to 0.50 A/cm2 in 5 s",
-            "minimum_voltage_v": pre_follow.min_voltage_v,
-            "minimum_temperature_after_load_c": float(np.min(
-                pre_follow.temperature_c[pre_follow.time_s >= PREHEAT[1]])),
-            "terminal_min_temperature_c": float(min(pre_follow.final_temperature_c)),
-            "terminal_current_a_cm2": float(pre_follow.current_a_cm2[-1]),
-            "charge_c_cm2": float(pre_follow.charge_c_cm2[-1]),
-            "note": "stability check only; not added to the PDF first-passage definition",
-        },
-    }
-    (OUT / "interpretation_checks.json").write_text(
-        json.dumps(alternate, ensure_ascii=False, indent=2), encoding="utf-8")
-    paths = [HERE / "aux_model.py", HERE / "search.py", HERE / "finalize.py",
-             HERE / "verify.py",
-             ROOT / "问题1/model.py", ROOT / "问题2/stack_model.py",
-             ROOT / "result/metrics.json",
-             *[OUT / name for name in ("preheat_search.json", "table4.json", "table4.csv",
-                "preheat_trajectory.csv", "cooperative_trajectory.csv",
-                "strategy_trajectories.png", "energy_distribution.png",
-                "interpretation_checks.json",
-                "verification.json")]]
-    manifest = {"status": "completed_model_prediction",
-                "command": f"{sys.executable} 问题3/finalize.py",
-                "files": [file_info(p) for p in paths if p.exists()]}
-    (OUT / "run_manifest.json").write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
-
-
+                        r.max_ice_fraction,
+                        max(r.peak_ice_fraction_by_cell[0], r.peak_ice_fraction_by_cell[4]),
+                        r.min_voltage_v, r.success])
 if __name__ == "__main__":
     main()

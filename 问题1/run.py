@@ -248,7 +248,7 @@ def main():
 
     payload = {
         'status': 'computed_q1_only', 'generated_at': datetime.now().isoformat(timespec='seconds'),
-        'source_statement': 'problem_files/氢燃料电池低温冷启动建模与控制策略研究.pdf',
+        'source_statement': '氢燃料电池低温冷启动建模与控制策略研究.pdf',
         'calibration_condition': '-20℃', 'independent_validation_condition': '-25℃',
         'calibration_success': bool(coarse_fit.success and fit.success), 'calibration_message': fit.message,
         'calibration_mesh_cells': model.n, 'report_time_step_s': .05,
@@ -264,8 +264,8 @@ def main():
     }
     (OUT / 'metrics.json').write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
     paths = [Path(__file__), Path(__file__).parent/'model.py', Path(__file__).parent/'data.py',
-             EXPERIMENT_FILE, ROOT/'problem_files/附件1.xlsx',
-             ROOT/'problem_files/氢燃料电池低温冷启动建模与控制策略研究.pdf']
+             EXPERIMENT_FILE, ROOT/'附件'/'附件1.xlsx',
+             ROOT/'氢燃料电池低温冷启动建模与控制策略研究.pdf']
     paths += sorted(p for p in OUT.iterdir() if p.is_file() and p.name != 'run_manifest.json')
     manifest = {
         'status': 'completed_q1_only', 'generated_at': datetime.now().isoformat(timespec='seconds'),

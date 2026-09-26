@@ -1,0 +1,156 @@
+{
+  "status": "completed_q4_model_prediction",
+  "generated_at": "2026-09-26T05:43:13.555115+00:00",
+  "command": "D:\\Anaconda\\python.exe 问题4/run.py",
+  "python": "3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 16:37:03) [MSC v.1929 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "working_directory": "D:\\Learning\\study\\postgraduate\\HUAWEI_Math",
+  "model_lineage": [
+    "问题1 calibrated 1-D multiphase cell",
+    "问题2 five-cell/end-plate thermal network",
+    "问题3 prescribed current ramp and constant-power baseline",
+    "问题4 pre-cooling field and event-triggered feedback"
+  ],
+  "files": [
+    {
+      "path": "问题4/dynamic_model.py",
+      "bytes": 21295,
+      "sha256": "51052dc2a1e7b40f8c70f213b8d90680cf78d4577110a4339a16f6a9d8b909ea"
+    },
+    {
+      "path": "问题4/optimize.py",
+      "bytes": 20332,
+      "sha256": "887a30ee999564feab6e8552977b210fdb0b4ae67f10aceffed64324fe170054"
+    },
+    {
+      "path": "问题4/verify.py",
+      "bytes": 5008,
+      "sha256": "4ae0e44dcf070e922c10f9458b1bb5a0b65cd2c9f35fa09c4325f6ab73cd4d10"
+    },
+    {
+      "path": "问题4/scan_precooling.py",
+      "bytes": 1781,
+      "sha256": "ebc91eae11d6e10e65d312c1612d78dc18f634131bbe2b67e541385dee382dbd"
+    },
+    {
+      "path": "问题4/run.py",
+      "bytes": 400,
+      "sha256": "66159c6b31b7e989b55fe7f7d92284b4d50ca52b4580e413d98970b153a353e7"
+    },
+    {
+      "path": "问题4/build_manifest.py",
+      "bytes": 2080,
+      "sha256": "0017c82bb7933702037d016862d2a1b8f1d049d581bfbb0ca5f3b2f89b5c8991"
+    },
+    {
+      "path": "问题4/README.md",
+      "bytes": 942,
+      "sha256": "909d2c4b7b7e62e1556e6c93f36caee2f18a4686457899e051b410634f129515"
+    },
+    {
+      "path": "问题4/问题4的解决方案与结果分析.md",
+      "bytes": 17264,
+      "sha256": "e98d197c680bb83abbd3591b9d7e3130a4b95852c12453bd4cbf7aa5e815574a"
+    },
+    {
+      "path": "问题3/aux_model.py",
+      "bytes": 15015,
+      "sha256": "ae2b99e80286e79d8eb99765ec1d7b180e1744afc274d07f8a32e541c418c294"
+    },
+    {
+      "path": "问题3/results/cooperative_search.json",
+      "bytes": 2790,
+      "sha256": "5bf3a45604e1ed8a3558112e0baab6cb46ed87cb9db0fd73c57339e0dd690af4"
+    },
+    {
+      "path": "result/metrics.json",
+      "bytes": 5062,
+      "sha256": "3ac9cb096592c15c22cc87b1114325b2a74b13b77db0c08f2abf64624ae52e15"
+    },
+    {
+      "path": "问题4/results/case1_constant_trajectory.csv",
+      "bytes": 446335,
+      "sha256": "f1896a9919eebe116c9c02da5d2258b87206967dcd5c9039a3ac415c61906a2f"
+    },
+    {
+      "path": "问题4/results/case1_dynamic_trajectory.csv",
+      "bytes": 445983,
+      "sha256": "896fb4b6453daba4514300eb722c823b38863720b20cc37223e1775d4113f3d9"
+    },
+    {
+      "path": "问题4/results/case2_constant_trajectory.csv",
+      "bytes": 116146,
+      "sha256": "47fdac16175fe949c9125a66ef7eef12868e25e649e4ccc0fc104cfac83b877f"
+    },
+    {
+      "path": "问题4/results/case2_dynamic_trajectory.csv",
+      "bytes": 126318,
+      "sha256": "5ac68fb07ab31d925b38ec8a872328f6e5be9c2a88b9b2192e88688327d946b7"
+    },
+    {
+      "path": "问题4/results/case3_constant_trajectory.csv",
+      "bytes": 358120,
+      "sha256": "60c79adc857f981a4ee916b2b92743693ec33bf822bb103146a69ceeddc84dee"
+    },
+    {
+      "path": "问题4/results/case3_dynamic_trajectory.csv",
+      "bytes": 367547,
+      "sha256": "387706d34df00717691fdb27cfea4bdf9aed07ebcbd985cb32d3a4d5b27ed7c0"
+    },
+    {
+      "path": "问题4/results/constant_strategy_cooling_scan.csv",
+      "bytes": 1828,
+      "sha256": "3611ae3cf7081f99652e11f6a25b286f2a759541e10330532fcb7f76591a85f6"
+    },
+    {
+      "path": "问题4/results/constant_strategy_cooling_scan.json",
+      "bytes": 4790,
+      "sha256": "4653e5ab1d19aefca67ed94ba8e68144838fbbd349c395b00be64b40951958db"
+    },
+    {
+      "path": "问题4/results/constant_strategy_cooling_scan.png",
+      "bytes": 204384,
+      "sha256": "381ed6dce7ed57fc334c70ca589a15eca6a00abb5b5771df6155ca8eee0588cb"
+    },
+    {
+      "path": "问题4/results/control_parameters.json",
+      "bytes": 5077,
+      "sha256": "f42d92108769b0cd7f2e1cc2baa3e88f720bea84ccc5480547fc0d71e0859b43"
+    },
+    {
+      "path": "问题4/results/dynamic_control_trajectories.png",
+      "bytes": 383210,
+      "sha256": "7a88f220c6422d0e94d7cc030e9c43c5c582321d0e5fce49b6e168351487db36"
+    },
+    {
+      "path": "问题4/results/precooling_temperature_field.csv",
+      "bytes": 14313,
+      "sha256": "a78bb43ee88ea56b46d76b86356c483f3c8c1ab4f524416d8b184b9f69425c91"
+    },
+    {
+      "path": "问题4/results/precooling_temperature_field.png",
+      "bytes": 80665,
+      "sha256": "354a07927dcd504f596575e3436f030fd3d415f0e5cc13ede5b77e14373ba1ee"
+    },
+    {
+      "path": "问题4/results/strategy_comparison.png",
+      "bytes": 152561,
+      "sha256": "ed34d49be9dc8726d9b84d0d6d4f5ee58a7004bd5d9ea0abe8904d98bd69e54c"
+    },
+    {
+      "path": "问题4/results/table_q4.csv",
+      "bytes": 1317,
+      "sha256": "ebe8fa1ffd49c4f2e0cedd9a1daa1430335e0cdcee67dd21191b71ab00212d01"
+    },
+    {
+      "path": "问题4/results/table_q4.json",
+      "bytes": 9067,
+      "sha256": "cf402d03379e4d94e1a9bc6469b9c077b3a041d0f9c0f64116a456722fc1c4fd"
+    },
+    {
+      "path": "问题4/results/verification.json",
+      "bytes": 6699,
+      "sha256": "466ca71162db5975538ad8e95765a305ab6cfa49a488bc868f358768b62b3a71"
+    }
+  ]
+}
